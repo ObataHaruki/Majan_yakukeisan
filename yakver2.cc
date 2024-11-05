@@ -560,6 +560,7 @@ int haiteiflag(int flag) {
   return x;
 }
 
+//海底の処理
 int haiteichose(int yk[],int yak, int tumoflag, int rinflag){
   int kakuritu=0;
   int yakflag=0;
@@ -1410,7 +1411,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
       // 平和無し
       case 2:
         yakflag = titoituflag(yakflag);
-        // std::cout<<"七対子フラグ"<<yakflag<<std::endl;
+        std::cout<<"七対子フラグ"<<yakflag<<std::endl;
         switch (yakflag) {
         // 七対子あり
         case 1:
@@ -1595,6 +1596,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                 yk[4] = honitu;
                 yak = yakadd(yak, 3);
 
+                case 2:
+
                 yakflag = 0;
                 yakflag = ryanpekoflag(yakflag);
                 std::cout << "二盃口" << yakflag << std::endl;
@@ -1717,6 +1720,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                   case 2:
                     yakflag = 0;
                     yakflag = sanankoflag(yakflag);
+                    std::cout<<"三暗刻フラグ"<<yakflag<<std::endl;
 
                     switch (yakflag) {
                     //三暗刻有
@@ -1807,6 +1811,170 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                             break;
 
                             case 2:
+                            yakflag=0;
+                            yakflag=sangenflag(yakflag);
+                            std::cout<<"三元牌フラグ"<<yakflag<<std::endl;
+
+                            switch (yakflag) {
+                              case 1:
+                              case 2:
+                              case 3:
+
+                                if(yakflag==1){
+                                  hakuflag=1;
+                                }else if(yakflag==2){
+                                  hatuflag=1;
+                                }else if(yakflag==3){
+                                  tyunflag=1;
+                                }
+                                yk[8]=sangen;
+                                yak=yakadd(yak, 1);
+
+                                yakflag=0;
+                                yakflag=sangenflag(yakflag);
+                                std::cout<<"三元牌フラグ"<<yakflag<<std::endl;
+
+                                switch (yakflag) {
+                                  case 1:
+                                  case 2:
+                                  case 3:
+
+                                    if(yakflag==1){
+                                      if(hakuflag==1){
+                                        hatuflag=sangenhai();
+                                        if(hatuflag==0){
+                                          tyunflag=1;
+                                        }
+                                      }else{
+                                        hakuflag=1;
+                                      }
+                                    }else if(yakflag==2){
+                                      if(hatuflag==1){
+                                        tyunflag=sangenhai();
+                                        if(tyunflag==0){
+                                          hakuflag=1;
+                                        }
+                                      }else{
+                                        hatuflag=1;
+                                      }
+
+                                    }else if(yakflag==3){
+                                      if(tyunflag==1){
+                                        hakuflag=sangenhai();
+                                        if(hakuflag==0){
+                                          hatuflag=1;
+                                        }
+                                      }else {
+                                        tyunflag=1;
+                                      }
+
+                                    }
+
+                                    yk[9]=sangen;
+                                    yak=yakadd(yak,1);
+
+                                    yakflag=0;
+                                    yakflag=kazehaiflag(oyaflag);
+                                    std::cout<<"風牌フラグ"<<yakflag<<std::endl;
+
+                                    switch (yakflag) {
+                                      case 1:
+                                        yk[10]=jikaze;
+                                        yak=yakadd(yak, 1);
+
+                                        haiteichose(yk,yak,tumoflag,rinflag);
+                                      break;
+
+                                      case 2:
+                                        yk[10]=bakaze;
+                                        yak=yakadd(yak, 1);
+
+                                        haiteichose(yk,yak,tumoflag,rinflag);
+                                      break;
+
+                                      case 3:
+                                      yk[10]=jikaze;
+                                      yk[11]=bakaze;
+                                      yak=yakadd(yak,2);
+
+                                      haiteichose(yk,yak,tumoflag,rinflag);
+                                      break;
+
+                                      case 4:
+                                        haiteichose(yk,yak,tumoflag,rinflag);
+                                      break;
+                                    }
+                                  break;
+                                
+                                }
+
+                              break;
+
+                              case 4:
+                                yakflag=0;
+                                yakflag=kazehaiflag(oyaflag);
+                                std::cout<<"風牌フラグ"<<yakflag<<std::endl;
+
+                                switch (yakflag) {
+                                  case 1:
+                                    yk[8]=jikaze;
+                                    yak=yakadd(yak, 1);
+
+                                    yakflag=0;
+                                    yakflag=kazehaiflag(oyaflag);
+                                    std::cout<<"風牌フラグ"<<yakflag<<std::endl;
+
+                                    switch (yakflag) {
+                                      case 2:
+                                        yk[9]=bakaze;
+                                        yak=yakadd(yak, 1);
+                                      case 1:
+                                      case 3:
+                                      case 4:
+                                        yakflag=kazehaiflag(oyaflag);
+                                      break;
+                                    
+                                    }
+                                  break;
+                                  
+                                  case 2:
+                                    yk[8]=bakaze;
+                                    yak=yakadd(yak, 1);
+
+                                    yakflag=0;
+                                    yakflag=kazehaiflag(oyaflag);
+                                    std::cout<<"風牌フラグ"<<yakflag<<std::endl;
+
+                                    switch (yakflag) {
+                                      case 1:
+                                        yk[9]=jikaze;
+                                        yak=yakadd(yak, 1);
+                                      case 2:
+                                      case 3:
+                                      case 4:
+                                        yakflag=kazehaiflag(oyaflag);
+                                      break;
+                                    
+                                    }
+                                    
+                                  break;
+
+                                  case 3:
+                                    yk[8]=jikaze;
+                                    yk[9]=bakaze;
+                                    yak=yakadd(yak, 2);
+
+                                    haiteichose(yk,yak,tumoflag,rinflag);
+                                  break;
+
+                                  case 4:
+                                    haiteichose(yk,yak,tumoflag,rinflag);
+                                  break;
+                                
+                                }
+                              break;
+                            
+                            }
                             
                             break;
                           }
@@ -1827,6 +1995,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                     case 2:
                       yakflag = 0;
                       yakflag = shosangenflag(yakflag);
+                      std::cout<<"小三元フラグ"<<yakflag<<std::endl;
 
                       switch (yakflag) {
                       case 1:
@@ -1958,6 +2127,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                       case 2:
                         yakflag = 0;
                         yakflag = tyantaflag(yakflag);
+                        std::cout<<"チャンタフラグ"<<yakflag<<std::endl;
 
                         switch (yakflag) {
                         // チャンタ有
@@ -2483,6 +2653,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                         case 2:
                           yakflag = 0;
                           yakflag = ittuflag(yakflag);
+                          std::cout<<"一気通貫フラグ"<<yakflag<<std::endl;
 
                           switch (yakflag) {
                           case 1:
@@ -2568,6 +2739,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                           case 2:
                             yakflag = 0;
                             yakflag = ipekoflag(yakflag);
+                            std::cout<<"一盃口フラグ"<<yakflag<<std::endl;
 
                             switch (yakflag) {
                             case 1:
@@ -2747,6 +2919,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                             case 2:
                               yakflag = 0;
                               yakflag = kazehaiflag(oyaflag);
+                              std::cout<<"風牌フラグ"<<yakflag<<std::endl;
 
                               switch (yakflag) {
                               case 1:
@@ -2755,6 +2928,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
 
                                 yakflag = 0;
                                 yakflag = kazehaiflag(oyaflag);
+                                std::cout<<"風牌フラグ"<<yakflag<<std::endl;
 
                                 switch (yakflag) {
                                 case 2:
@@ -2763,6 +2937,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
 
                                   yakflag = 0;
                                   yakflag = sangenflag(yakflag);
+                                  std::cout<<"三元牌フラグ"<<yakflag<<std::endl;
 
                                   switch (yakflag) {
                                   case 1:
@@ -2781,6 +2956,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
 
                                     yakflag = 0;
                                     yakflag = sangenflag(yakflag);
+                                    std::cout<<"三元牌フラグ"<<yakflag<<std::endl;
 
                                     switch (yakflag) {
                                     case 1:
@@ -2822,6 +2998,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                 case 3:
                                   yakflag = 0;
                                   yakflag = sangenflag(yakflag);
+                                  std::cout<<"三元牌フラグ"<<yakflag<<std::endl;
 
                                   switch (yakflag) {
                                   case 1:
@@ -2840,6 +3017,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
 
                                     yakflag = 0;
                                     yakflag = sangenflag(yakflag);
+                                    std::cout<<"三元牌フラグ"<<yakflag<<std::endl;
 
                                     switch (yakflag) {
                                     case 1:
@@ -2886,6 +3064,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
 
                                 yakflag = 0;
                                 yakflag = kazehaiflag(oyaflag);
+                                std::cout<<"風牌フラグ"<<yakflag<<std::endl;
 
                                 switch (yakflag) {
                                 case 1:
@@ -2894,6 +3073,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
 
                                   yakflag = 0;
                                   yakflag = sangenflag(yakflag);
+                                  std::cout<<"三元牌フラグ"<<yakflag<<std::endl;
 
                                   switch (yakflag) {
                                   case 1:
@@ -2953,6 +3133,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                 case 3:
                                   yakflag = 0;
                                   yakflag = sangenflag(yakflag);
+                                  std::cout<<"三元牌フラグ"<<yakflag<<std::endl;
 
                                   switch (yakflag) {
                                   case 1:
@@ -2971,6 +3152,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
 
                                     yakflag = 0;
                                     yakflag = sangenflag(yakflag);
+                                    std::cout<<"三元牌フラグ"<<yakflag<<std::endl;
 
                                     switch (yakflag) {
                                     case 1:
@@ -3019,6 +3201,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
 
                                 yakflag = 0;
                                 yakflag = sangenflag(yakflag);
+                                std::cout<<"三元牌フラグ"<<yakflag<<std::endl;
 
                                 switch (yakflag) {
                                 case 1:
@@ -3077,6 +3260,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
 
                                 break;
                               }
+                            break;
 
                             case 3:
                              
@@ -3128,6 +3312,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                   break;
                 }
                 break;
+
               }
               break;
 
@@ -3257,30 +3442,26 @@ int yakchose(int naki) {
       yk[1] = doublereach;
       yak = yakadd(yak, 2);
       reachflag = 2;
-
-      switch (yakflag) {
-      case 1:
-        yakflag = 0;
-        kakuritu = random2(100);
+      
+      yakflag = 0;
+      kakuritu = random2(100);
         // 一発の有無
 
-        if (kakuritu <= 10) {
-          yakflag = 1;
-        } else {
-          yakflag = 2;
-        }
+      if (kakuritu <= 10) {
+        yakflag = 1;
+      } else {
+        yakflag = 2;
+      } 
 
-        switch (yakflag) {
-        //  一発有
-        case 1:
-          yk[2] = ippatu;
-          yak = yakadd(yak, 1);
-        //  一発無し
-        case 2:
-          yak = menzen(yk, yak, oyaflag, reachflag);
-          break;
-        }
-        break;
+      switch (yakflag) {
+      //  一発有
+      case 1:
+        yk[2] = ippatu;
+        yak = yakadd(yak, 1);
+      //  一発無し
+      case 2:
+        yak = menzen(yk, yak, oyaflag, reachflag);
+      break;
       }
       break;
 
