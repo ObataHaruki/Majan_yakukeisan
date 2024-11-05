@@ -3482,6 +3482,12 @@ int yakchose(int naki) {
   return yak;
 }
 
+int yakmanchose(int naki){
+  int x;
+  
+  return x;
+}
+
 //メインプログラム
 int main() {
   int flag;
@@ -3510,7 +3516,7 @@ int main() {
 
   switch (flag) {
   case 1:
-    outyak = yakchose(nakiflag);
+    outyak = yakmanchose(nakiflag);
     break;
 
   case 2:
