@@ -560,6 +560,34 @@ int haiteiflag(int flag) {
   return x;
 }
 
+int haiteichose(int yk[],int yak, int tumoflag, int rinflag){
+  int kakuritu=0;
+  int yakflag=0;
+
+  yakflag=haiteiflag(yakflag);
+  std::cout << "海底フラグ" << yakflag << std::endl;
+
+
+  switch(yakflag){
+    //海底あり
+    case 1:
+      if((tumoflag==1)&&(rinflag==0)){
+        yk[13]=haitei;
+        yak=yakadd(yak , 1);
+      }else if((tumoflag==0)&&(rinflag==0)){
+        yk[13]=houtei;
+        yak=yakadd(yak,1);
+      }
+    //海底なし
+      case 2:
+
+      yakoutput(yk,yak);
+    break;
+  }
+
+  return 0;
+}
+
 int sangenhai(){
   int x;
   int i=0;
