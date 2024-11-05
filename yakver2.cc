@@ -1,4 +1,4 @@
-#include <cstdint>
+//#include <cstdint>
 #include <iostream>
 #include <random>
 #include <stdio.h>
@@ -560,16 +560,25 @@ int haiteiflag(int flag) {
   return x;
 }
 
+int sangenhai(){
+  int x;
+  int i=0;
+
+  x=random2(100);
+
+  if((x%3)==0){
+    i=1;
+  }
+
+  return i;
+}
+
 //面前での役抽選
 int menzen(int yk[], int yak, int oyaflag, int reach) {
   int yakflag;
-  // int yk[13]={0,0,0,0,0,0,0,0,0,0,0,0,0};
   int kakuritu;
-  // int yak=0;
   int tumoflag = 0;
-  // int reachflag=0;
   int rinflag = 0;
-  // int oyaflag=0;
   int hakuflag = 0;
   int hatuflag = 0;
   int tyunflag = 0;
@@ -648,30 +657,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
           case 1:
             yk[7] = ryanpeko;
             yak = yakadd(yak, 3);
-            yakflag = 0;
-            yakflag = haiteiflag(yakflag);
-            std::cout << "海底フラグ" << yakflag << std::endl;
 
-            switch (yakflag) {
-            // 海底あり
-            case 1:
-              if (tumoflag == 1) {
-                yk[8] = haitei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              } else {
-                yk[8] = houtei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              }
-              break;
-            // 海底無し
-            case 2:
-              yakoutput(yk, yak);
-              break;
-            }
+            haiteichose(yk,yak,tumoflag,rinflag);
             break;
           // 二盃口無し
           case 2:
@@ -685,59 +672,15 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
               yak = yakadd(yak, 1);
             case 2:
             case 3:
-              yakflag = 0;
-              yakflag = haiteiflag(yakflag);
-              std::cout << "海底フラグ" << yakflag << std::endl;
 
-              switch (yakflag) {
-                // 海底あり
-              case 1:
-                if (tumoflag == 1) {
-                  yk[8] = haitei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                } else {
-                  yk[8] = houtei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                }
-                break;
-                // 海底無し
-              case 2:
-                yakoutput(yk, yak);
-                break;
-              }
+              haiteichose(yk,yak,tumoflag,rinflag);
               break;
             }
             break;
           // 役決定
           case 3:
-            yakflag = 0;
-            yakflag = haiteiflag(yakflag);
-            std::cout << "海底フラグ" << yakflag << std::endl;
 
-            switch (yakflag) {
-            // 海底あり
-            case 1:
-              if (tumoflag == 1) {
-                yk[7] = haitei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              } else {
-                yk[7] = houtei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              }
-              break;
-            // 海底無し
-            case 2:
-              yakoutput(yk, yak);
-              break;
-            }
+            haiteichose(yk,yak,tumoflag,rinflag);
             break;
           }
 
@@ -754,30 +697,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
           case 1:
             yk[7] = ryanpeko;
             yak = yakadd(yak, 3);
-            yakflag = 0;
-            yakflag = haiteiflag(yakflag);
-            std::cout << "海底フラグ" << yakflag << std::endl;
 
-            switch (yakflag) {
-            // 海底あり
-            case 1:
-              if (tumoflag == 1) {
-                yk[8] = haitei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              } else {
-                yk[8] = houtei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              }
-              break;
-            // 海底無し
-            case 2:
-              yakoutput(yk, yak);
-              break;
-            }
+            haiteichose(yk,yak,tumoflag,rinflag);
 
             break;
 
@@ -804,145 +725,39 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                 yk[7] = ipeko;
                 yak = yakadd(yak, 1);
 
-                yakflag = 0;
-                yakflag = haiteiflag(yakflag);
-                std::cout << "海底フラグ" << yakflag << std::endl;
-
-                switch (yakflag) {
-                // 海底あり
-                case 1:
-                  if (tumoflag == 1) {
-                    yk[8] = haitei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  } else {
-                    yk[8] = houtei;
-                    yak = yakadd(yak, 1);
-                    yakoutput(yk, yak);
-                  }
-                  break;
-                // 海底無し
-                case 2:
-                  yakoutput(yk, yak);
-                  break;
-                }
+                haiteichose(yk,yak,tumoflag,rinflag);
 
                 break;
               // 一盃口無し
               case 2:
               // 役決定
               case 3:
-                yakflag = 0;
-                yakflag = haiteiflag(yakflag);
-                std::cout << "海底フラグ" << yakflag << std::endl;
 
-                switch (yakflag) {
-                // 海底あり
-                case 1:
-                  if (tumoflag == 1) {
-                    yk[7] = haitei;
-                    yak = yakadd(yak, 1);
+                haiteichose(yk,yak,tumoflag,rinflag);
 
-                    yakoutput(yk, yak);
-                  } else {
-                    yk[7] = houtei;
-                    yak = yakadd(yak, 1);
-                    yakoutput(yk, yak);
-                  }
-                  break;
-                // 海底無し
-                case 2:
-                  yakoutput(yk, yak);
-                  break;
-                }
                 break;
               }
               break;
 
             // 役決定
             case 3:
-              yakflag = 0;
-              yakflag = haiteiflag(yakflag);
-              std::cout << "海底フラグ" << yakflag << std::endl;
 
-              switch (yakflag) {
-                // 海底あり
-              case 1:
-                if (tumoflag == 1) {
-                  yk[6] = haitei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                } else {
-                  yk[6] = houtei;
-                  yak = yakadd(yak, 1);
-                  yakoutput(yk, yak);
-                }
-                break;
-                // 海底無し
-              case 2:
-                yakoutput(yk, yak);
-                break;
-              }
+              haiteichose(yk,yak,tumoflag,rinflag);
               break;
             }
             break;
           // 役決定
           case 3:
-            yakflag = 0;
-            yakflag = haiteiflag(yakflag);
-            std::cout << "海底フラグ" << yakflag << std::endl;
 
-            switch (yakflag) {
-            // 海底あり
-            case 1:
-              if (tumoflag == 1) {
-                yk[7] = haitei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              } else {
-                yk[7] = houtei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              }
-              break;
-            // 海底無し
-            case 2:
-              yakoutput(yk, yak);
-              break;
-            }
+            haiteichose(yk,yak,tumoflag,rinflag);
             break;
           }
           break;
 
         // 役の決定
         case 3:
-          yakflag = 0;
-          yakflag = haiteiflag(yakflag);
-          std::cout << "海底フラグ" << yakflag << std::endl;
 
-          switch (yakflag) {
-            // 海底あり
-          case 1:
-            if (tumoflag == 1) {
-              yk[6] = haitei;
-              yak = yakadd(yak, 1);
-
-              yakoutput(yk, yak);
-            } else {
-              yk[6] = houtei;
-              yak = yakadd(yak, 1);
-              yakoutput(yk, yak);
-            }
-            break;
-            // 海底無し
-          case 2:
-            yakoutput(yk, yak);
-            break;
-          }
+          haiteichose(yk,yak,tumoflag,rinflag);
           break;
         }
         break;
@@ -957,30 +772,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
         case 1:
           yk[6] = titoitu;
           yak = yakadd(yak, 2);
-          yakflag = 0;
-          yakflag = haiteiflag(yakflag);
-          std::cout << "海底フラグ" << yakflag << std::endl;
 
-          switch (yakflag) {
-          // 海底あり
-          case 1:
-            if (tumoflag == 1) {
-              yk[7] = haitei;
-              yak = yakadd(yak, 1);
-
-              yakoutput(yk, yak);
-            } else {
-              yk[7] = houtei;
-              yak = yakadd(yak, 1);
-
-              yakoutput(yk, yak);
-            }
-            break;
-          // 海底無し
-          case 2:
-            yakoutput(yk, yak);
-            break;
-          }
+          haiteichose(yk,yak,tumoflag,rinflag);
 
           break;
         // 七対子無
@@ -1027,61 +820,16 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                   case 1:
                     yk[9] = sankantu;
                     yak = yakadd(yak, 2);
-                    yakflag = 0;
-                    yakflag = haiteiflag(yakflag);
-                    std::cout << "海底フラグ" << yakflag << std::endl;
 
-                    switch (yakflag) {
-                    // 海底あり
-                    case 1:
-                      if (tumoflag == 1) {
-                        yk[9] = haitei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      } else {
-                        yk[9] = houtei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      }
-                      break;
-                    // 海底無し
-                    case 2:
-                      yakoutput(yk, yak);
-                      break;
-                    }
-
+                    haiteichose(yk,yak,tumoflag,rinflag);
                     break;
 
                   // 三槓子無
                   case 2:
                   // 役決定
                   case 3:
-                    yakflag = 0;
-                    yakflag = haiteiflag(yakflag);
-                    std::cout << "海底フラグ" << yakflag << std::endl;
-
-                    switch (yakflag) {
-                    // 海底あり
-                    case 1:
-                      if (tumoflag == 1) {
-                        yk[9] = haitei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      } else {
-                        yk[9] = houtei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      }
-                      break;
-                    // 海底無し
-                    case 2:
-                      yakoutput(yk, yak);
-                      break;
-                    }
+        
+                    haiteichose(yk,yak,tumoflag,rinflag);
                     break;
                   }
                 }
@@ -1110,30 +858,9 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                   // 三槓子無
                   case 2:
                   case 3:
-                    yakflag = 0;
-                    yakflag = haiteiflag(yakflag);
-                    std::cout << "海底フラグ" << yakflag << std::endl;
 
-                    switch (yakflag) {
-                      // 海底あり
-                    case 1:
-                      if (tumoflag == 1) {
-                        yk[9] = haitei;
-                        yak = yakadd(yak, 1);
+                    haiteichose(yk,yak,tumoflag,rinflag);
 
-                        yakoutput(yk, yak);
-                      } else {
-                        yk[7] = houtei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      }
-                      break;
-                      // 海底無し
-                    case 2:
-                      yakoutput(yk, yak);
-                      break;
-                    }
                     break;
                   }
                   break;
@@ -1142,59 +869,15 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                 case 2:
                 // 役決定
                 case 3:
-                  yakflag = 0;
-                  yakflag = haiteiflag(yakflag);
-                  std::cout << "海底フラグ" << yakflag << std::endl;
 
-                  switch (yakflag) {
-                    // 海底あり
-                  case 1:
-                    if (tumoflag == 1) {
-                      yk[7] = haitei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    } else {
-                      yk[7] = houtei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    }
-                    break;
-                    // 海底無し
-                  case 2:
-                    yakoutput(yk, yak);
-                    break;
-                  }
+                  haiteichose(yk,yak,tumoflag,rinflag);
                   break;
                 }
                 break;
               // 役決定
               case 3:
-                yakflag = 0;
-                yakflag = haiteiflag(yakflag);
-                std::cout << "海底フラグ" << yakflag << std::endl;
 
-                switch (yakflag) {
-                // 海底あり
-                case 1:
-                  if (tumoflag == 1) {
-                    yk[7] = haitei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  } else {
-                    yk[7] = houtei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  }
-                  break;
-                // 海底無し
-                case 2:
-                  yakoutput(yk, yak);
-                  break;
-                }
+                haiteichose(yk,yak,tumoflag,rinflag);
                 break;
               }
               break;
@@ -1236,29 +919,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                       yak = yakadd(yak, 2);
                     case 2:
                     case 3:
-                      yakflag = haiteiflag(yakflag);
-                      std::cout << "海底フラグ" << yakflag << std::endl;
-
-                      switch (yakflag) {
-                      // 海底あり
-                      case 1:
-                        if (tumoflag == 1) {
-                          yk[11] = haitei;
-                          yak = yakadd(yak, 1);
-
-                          yakoutput(yk, yak);
-                        } else {
-                          yk[11] = houtei;
-                          yak = yakadd(yak, 1);
-
-                          yakoutput(yk, yak);
-                        }
-                        break;
-                      // 海底無し
-                      case 2:
-                        yakoutput(yk, yak);
-                        break;
-                      }
+              
+                      haiteichose(yk,yak,tumoflag,rinflag);
 
                       break;
                     }
@@ -1269,30 +931,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                   case 2:
                   // 役決定
                   case 3:
-                    yakflag = 0;
-                    yakflag = haiteiflag(yakflag);
-                    std::cout << "海底フラグ" << yakflag << std::endl;
 
-                    switch (yakflag) {
-                    // 海底あり
-                    case 1:
-                      if (tumoflag == 1) {
-                        yk[9] = haitei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      } else {
-                        yk[9] = houtei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      }
-                      break;
-                    // 海底無し
-                    case 2:
-                      yakoutput(yk, yak);
-                      break;
-                    }
+                    haiteichose(yk,yak,tumoflag,rinflag);
                     break;
                   }
                 }
@@ -1330,59 +970,15 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                       yak = yakadd(yak, 2);
                     case 2:
                     case 3:
-                      yakflag = 0;
-                      yakflag = haiteiflag(yakflag);
-                      std::cout << "海底フラグ" << yakflag << std::endl;
 
-                      switch (yakflag) {
-                      // 海底あり
-                      case 1:
-                        if (tumoflag == 1) {
-                          yk[9] = haitei;
-                          yak = yakadd(yak, 1);
-
-                          yakoutput(yk, yak);
-                        } else {
-                          yk[7] = houtei;
-                          yak = yakadd(yak, 1);
-
-                          yakoutput(yk, yak);
-                        }
-                        break;
-                      // 海底無し
-                      case 2:
-                        yakoutput(yk, yak);
-                        break;
-                      }
+                      haiteichose(yk,yak,tumoflag,rinflag);
                       break;
                     }
                     break;
 
                   case 3:
-                    yakflag = 0;
-                    yakflag = haiteiflag(yakflag);
-                    std::cout << "海底フラグ" << yakflag << std::endl;
 
-                    switch (yakflag) {
-                      // 海底あり
-                    case 1:
-                      if (tumoflag == 1) {
-                        yk[9] = haitei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      } else {
-                        yk[7] = houtei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      }
-                      break;
-                      // 海底無し
-                    case 2:
-                      yakoutput(yk, yak);
-                      break;
-                    }
+                    haiteichose(yk,yak,tumoflag,rinflag);
                     break;
                   }
                   break;
@@ -1391,176 +987,45 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                 case 2:
                 // 役決定
                 case 3:
-                  yakflag = 0;
-                  yakflag = haiteiflag(yakflag);
-                  std::cout << "海底フラグ" << yakflag << std::endl;
-
-                  switch (yakflag) {
-                    // 海底あり
-                  case 1:
-                    if (tumoflag == 1) {
-                      yk[7] = haitei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    } else {
-                      yk[7] = houtei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    }
-                    break;
-                    // 海底無し
-                  case 2:
-                    yakoutput(yk, yak);
-                    break;
-                  }
+    
+                  haiteichose(yk,yak,tumoflag,rinflag);
                   break;
                 }
                 break;
               // 役決定
               case 3:
-                yakflag = 0;
-                yakflag = haiteiflag(yakflag);
-                std::cout << "海底フラグ" << yakflag << std::endl;
 
-                switch (yakflag) {
-                // 海底あり
-                case 1:
-                  if (tumoflag == 1) {
-                    yk[7] = haitei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  } else {
-                    yk[7] = houtei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  }
-                  break;
-                // 海底無し
-                case 2:
-                  yakoutput(yk, yak);
-                  break;
-                }
+                haiteichose(yk,yak,tumoflag,rinflag);
                 break;
               }
               break;
 
             // 役決定
             case 3:
-              yakflag = 0;
-              yakflag = haiteiflag(yakflag);
-              std::cout << "海底フラグ" << yakflag << std::endl;
 
-              switch (yakflag) {
-              // 海底あり
-              case 1:
-                if (tumoflag == 1) {
-                  yk[7] = haitei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                } else {
-                  yk[7] = houtei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                }
-                break;
-              // 海底無し
-              case 2:
-                yakoutput(yk, yak);
-                break;
-              }
+              haiteichose(yk,yak,tumoflag,rinflag);
               break;
             }
             break;
 
           case 3:
-            yakflag = 0;
-            yakflag = haiteiflag(yakflag);
-            std::cout << "海底フラグ" << yakflag << std::endl;
 
-            switch (yakflag) {
-            // 海底あり
-            case 1:
-              if (tumoflag == 1) {
-                yk[7] = haitei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              } else {
-                yk[7] = houtei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              }
-              break;
-            // 海底無し
-            case 2:
-              yakoutput(yk, yak);
-              break;
-            }
+            haiteichose(yk,yak,tumoflag,rinflag);
             break;
           }
 
           break;
         // 役決定
         case 3:
-          yakflag = 0;
-          yakflag = haiteiflag(yakflag);
-          std::cout << "海底フラグ" << yakflag << std::endl;
 
-          switch (yakflag) {
-          // 海底あり
-          case 1:
-            if (tumoflag == 1) {
-              yk[7] = haitei;
-              yak = yakadd(yak, 1);
-
-              yakoutput(yk, yak);
-            } else {
-              yk[7] = houtei;
-              yak = yakadd(yak, 1);
-
-              yakoutput(yk, yak);
-            }
-            break;
-          // 海底無し
-          case 2:
-            yakoutput(yk, yak);
-            break;
-          }
+          haiteichose(yk,yak,tumoflag,rinflag);
           break;
         }
         break;
       // 役決定
       case 3:
-        yakflag = 0;
-        yakflag = haiteiflag(yakflag);
-        std::cout << "海底フラグ" << yakflag << std::endl;
 
-        switch (yakflag) {
-        // 海底あり
-        case 1:
-          if (tumoflag == 1) {
-            yk[7] = haitei;
-            yak = yakadd(yak, 1);
-
-            yakoutput(yk, yak);
-          } else {
-            yk[7] = houtei;
-            yak = yakadd(yak, 1);
-            yakoutput(yk, yak);
-          }
-          break;
-          // 海底無し
-        case 2:
-          yakoutput(yk, yak);
-          break;
-        }
+        haiteichose(yk,yak,tumoflag,rinflag);
         break;
       }
       break;
@@ -1604,30 +1069,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
               yak = yakadd(yak, 3);
             case 2:
             case 3:
-              yakflag = 0;
-              yakflag = haiteiflag(yakflag);
-              std::cout << "海底フラグ" << yakflag << std::endl;
 
-              switch (yakflag) {
-              // 海底あり
-              case 1:
-                if (tumoflag == 1) {
-                  yk[9] = haitei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                } else {
-                  yk[9] = houtei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                }
-                break;
-              // 海底無し
-              case 2:
-                yakoutput(yk, yak);
-                break;
-              }
+              haiteichose(yk,yak,tumoflag,rinflag);
               break;
             }
             break;
@@ -1652,89 +1095,23 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                 yak = yakadd(yak, 1);
               case 2:
               case 3:
-                yakflag = 0;
-                yakflag = haiteiflag(yakflag);
-                std::cout << "海底フラグ" << yakflag << std::endl;
 
-                switch (yakflag) {
-                // 海底あり
-                case 1:
-                  if (tumoflag == 1) {
-                    yk[9] = haitei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  } else {
-                    yk[9] = houtei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  }
-                  break;
-                // 海底無し
-                case 2:
-                  yakoutput(yk, yak);
-                  break;
-                }
+                haiteichose(yk,yak,tumoflag,rinflag);
                 break;
               }
               break;
 
             case 3:
-              yakflag = 0;
-              yakflag = haiteiflag(yakflag);
-              std::cout << "海底フラグ" << yakflag << std::endl;
 
-              switch (yakflag) {
-              // 海底あり
-              case 1:
-                if (tumoflag == 1) {
-                  yk[8] = haitei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                } else {
-                  yk[8] = houtei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                }
-                break;
-              // 海底無し
-              case 2:
-                yakoutput(yk, yak);
-                break;
-              }
+              haiteichose(yk,yak,tumoflag,rinflag);
               break;
             }
             break;
 
           // 役決定
           case 3:
-            yakflag = 0;
-            yakflag = haiteiflag(yakflag);
-            std::cout << "海底フラグ" << yakflag << std::endl;
 
-            switch (yakflag) {
-            // 海底あり
-            case 1:
-              if (tumoflag == 1) {
-                yk[7] = haitei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              } else {
-                yk[7] = houtei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              }
-              break;
-            // 海底無し
-            case 2:
-              yakoutput(yk, yak);
-              break;
-            }
+            haiteichose(yk,yak,tumoflag,rinflag);
             break;
           }
           break;
@@ -1770,30 +1147,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                 yak = yakadd(yak, 2);
               case 2:
               case 3:
-                yakflag = 0;
-                yakflag = haiteiflag(yakflag);
-                std::cout << "海底フラグ" << yakflag << std::endl;
 
-                switch (yakflag) {
-                // 海底あり
-                case 1:
-                  if (tumoflag == 1) {
-                    yk[7] = haitei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  } else {
-                    yk[7] = houtei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  }
-                  break;
-                // 海底無し
-                case 2:
-                  yakoutput(yk, yak);
-                  break;
-                }
+                haiteichose(yk,yak,tumoflag,rinflag);
                 break;
               }
               break;
@@ -1818,88 +1173,22 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                   yak = yakadd(yak, 1);
                 case 2:
                 case 3:
-                  yakflag = 0;
-                  yakflag = haiteiflag(yakflag);
-                  std::cout << "海底フラグ" << yakflag << std::endl;
 
-                  switch (yakflag) {
-                  // 海底あり
-                  case 1:
-                    if (tumoflag == 1) {
-                      yk[9] = haitei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    } else {
-                      yk[9] = houtei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    }
-                    break;
-                  // 海底無し
-                  case 2:
-                    yakoutput(yk, yak);
-                    break;
-                  }
+                  haiteichose(yk,yak,tumoflag,rinflag);
                   break;
                 }
                 break;
 
               case 3:
-                yakflag = 0;
-                yakflag = haiteiflag(yakflag);
-                std::cout << "海底フラグ" << yakflag << std::endl;
 
-                switch (yakflag) {
-                // 海底あり
-                case 1:
-                  if (tumoflag == 1) {
-                    yk[7] = haitei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  } else {
-                    yk[7] = houtei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  }
-                  break;
-                // 海底無し
-                case 2:
-                  yakoutput(yk, yak);
-                  break;
-                }
+                haiteichose(yk,yak,tumoflag,rinflag);
                 break;
               }
               break;
 
             case 3:
-              yakflag = 0;
-              yakflag = haiteiflag(yakflag);
-              std::cout << "海底フラグ" << yakflag << std::endl;
 
-              switch (yakflag) {
-              // 海底あり
-              case 1:
-                if (tumoflag == 1) {
-                  yk[7] = haitei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                } else {
-                  yk[7] = houtei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                }
-                break;
-              // 海底無し
-              case 2:
-                yakoutput(yk, yak);
-                break;
-              }
+              haiteichose(yk,yak,tumoflag,rinflag);
               break;
             }
             break;
@@ -1924,30 +1213,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                 yk[7] = ryanpeko;
                 yak = yakadd(yak, 3);
 
-                yakflag = 0;
-                yakflag = haiteiflag(yakflag);
-                std::cout << "海底フラグ" << yakflag << std::endl;
-
-                switch (yakflag) {
-                // 海底あり
-                case 1:
-                  if (tumoflag == 1) {
-                    yk[7] = haitei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  } else {
-                    yk[7] = houtei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  }
-                  break;
-                // 海底無し
-                case 2:
-                  yakoutput(yk, yak);
-                  break;
-                }
+                haiteichose(yk,yak,tumoflag,rinflag);
                 break;
 
               case 2:
@@ -1969,88 +1235,22 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                     yak = yakadd(yak, 1);
                   case 2:
                   case 3:
-                    yakflag = 0;
-                    yakflag = haiteiflag(yakflag);
-                    std::cout << "海底フラグ" << yakflag << std::endl;
 
-                    switch (yakflag) {
-                    // 海底あり
-                    case 1:
-                      if (tumoflag == 1) {
-                        yk[9] = haitei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      } else {
-                        yk[9] = houtei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      }
-                      break;
-                    // 海底無し
-                    case 2:
-                      yakoutput(yk, yak);
-                      break;
-                    }
+                    haiteichose(yk,yak,tumoflag,rinflag);
                     break;
                   }
                   break;
 
                 case 3:
-                  yakflag = 0;
-                  yakflag = haiteiflag(yakflag);
-                  std::cout << "海底フラグ" << yakflag << std::endl;
 
-                  switch (yakflag) {
-                  // 海底あり
-                  case 1:
-                    if (tumoflag == 1) {
-                      yk[7] = haitei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    } else {
-                      yk[7] = houtei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    }
-                    break;
-                  // 海底無し
-                  case 2:
-                    yakoutput(yk, yak);
-                    break;
-                  }
+                  haiteichose(yk,yak,tumoflag,rinflag);
                   break;
                 }
                 break;
 
               case 3:
-                yakflag = 0;
-                yakflag = haiteiflag(yakflag);
-                std::cout << "海底フラグ" << yakflag << std::endl;
 
-                switch (yakflag) {
-                // 海底あり
-                case 1:
-                  if (tumoflag == 1) {
-                    yk[7] = haitei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  } else {
-                    yk[7] = houtei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  }
-                  break;
-                // 海底無し
-                case 2:
-                  yakoutput(yk, yak);
-                  break;
-                }
+                haiteichose(yk,yak,tumoflag,rinflag);
                 break;
               }
               break;
@@ -2074,30 +1274,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                   yk[7] = ryanpeko;
                   yak = yakadd(yak, 3);
 
-                  yakflag = 0;
-                  yakflag = haiteiflag(yakflag);
-                  std::cout << "海底フラグ" << yakflag << std::endl;
-
-                  switch (yakflag) {
-                  // 海底あり
-                  case 1:
-                    if (tumoflag == 1) {
-                      yk[7] = haitei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    } else {
-                      yk[7] = houtei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    }
-                    break;
-                  // 海底無し
-                  case 2:
-                    yakoutput(yk, yak);
-                    break;
-                  }
+                  haiteichose(yk,yak,tumoflag,rinflag);
                   break;
 
                 case 2:
@@ -2119,88 +1296,22 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                       yak = yakadd(yak, 1);
                     case 2:
                     case 3:
-                      yakflag = 0;
-                      yakflag = haiteiflag(yakflag);
-                      std::cout << "海底フラグ" << yakflag << std::endl;
 
-                      switch (yakflag) {
-                      // 海底あり
-                      case 1:
-                        if (tumoflag == 1) {
-                          yk[9] = haitei;
-                          yak = yakadd(yak, 1);
-
-                          yakoutput(yk, yak);
-                        } else {
-                          yk[9] = houtei;
-                          yak = yakadd(yak, 1);
-
-                          yakoutput(yk, yak);
-                        }
-                        break;
-                      // 海底無し
-                      case 2:
-                        yakoutput(yk, yak);
-                        break;
-                      }
+                      haiteichose(yk,yak,tumoflag,rinflag);
                       break;
                     }
                     break;
 
                   case 3:
-                    yakflag = 0;
-                    yakflag = haiteiflag(yakflag);
-                    std::cout << "海底フラグ" << yakflag << std::endl;
 
-                    switch (yakflag) {
-                    // 海底あり
-                    case 1:
-                      if (tumoflag == 1) {
-                        yk[7] = haitei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      } else {
-                        yk[7] = houtei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      }
-                      break;
-                    // 海底無し
-                    case 2:
-                      yakoutput(yk, yak);
-                      break;
-                    }
+                    haiteichose(yk,yak,tumoflag,rinflag);
                     break;
                   }
                   break;
 
                 case 3:
-                  yakflag = 0;
-                  yakflag = haiteiflag(yakflag);
-                  std::cout << "海底フラグ" << yakflag << std::endl;
 
-                  switch (yakflag) {
-                  // 海底あり
-                  case 1:
-                    if (tumoflag == 1) {
-                      yk[7] = haitei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    } else {
-                      yk[7] = houtei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    }
-                    break;
-                  // 海底無し
-                  case 2:
-                    yakoutput(yk, yak);
-                    break;
-                  }
+                  haiteichose(yk,yak,tumoflag,rinflag);
                   break;
                 }
 
@@ -2226,176 +1337,44 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                     yak = yakadd(yak, 1);
                   case 2:
                   case 3:
-                    yakflag = 0;
-                    yakflag = haiteiflag(yakflag);
-                    std::cout << "海底フラグ" << yakflag << std::endl;
 
-                    switch (yakflag) {
-                    // 海底あり
-                    case 1:
-                      if (tumoflag == 1) {
-                        yk[7] = haitei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      } else {
-                        yk[7] = houtei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      }
-                      break;
-                    // 海底無し
-                    case 2:
-                      yakoutput(yk, yak);
-                      break;
-                    }
+                    haiteichose(yk,yak,tumoflag,rinflag);
                     break;
                   }
                   break;
 
                 case 3:
-                  yakflag = 0;
-                  yakflag = haiteiflag(yakflag);
-                  std::cout << "海底フラグ" << yakflag << std::endl;
 
-                  switch (yakflag) {
-                  // 海底あり
-                  case 1:
-                    if (tumoflag == 1) {
-                      yk[7] = haitei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    } else {
-                      yk[7] = houtei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    }
-                    break;
-                    // 海底無し
-                  case 2:
-                    yakoutput(yk, yak);
-                    break;
-                  }
+                  haiteichose(yk,yak,tumoflag,rinflag);
                   break;
                 }
                 break;
 
               case 3:
-                yakflag = 0;
-                yakflag = haiteiflag(yakflag);
-                std::cout << "海底フラグ" << yakflag << std::endl;
 
-                switch (yakflag) {
-                // 海底あり
-                case 1:
-                  if (tumoflag == 1) {
-                    yk[7] = haitei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  } else {
-                    yk[7] = houtei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  }
-                  break;
-                // 海底無し
-                case 2:
-                  yakoutput(yk, yak);
-                  break;
-                }
+                haiteichose(yk,yak,tumoflag,rinflag);
                 break;
               }
               break;
 
             case 3:
-              yakflag = 0;
-              yakflag = haiteiflag(yakflag);
-              std::cout << "海底フラグ" << yakflag << std::endl;
 
-              switch (yakflag) {
-              // 海底あり
-              case 1:
-                if (tumoflag == 1) {
-                  yk[7] = haitei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                } else {
-                  yk[7] = houtei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                }
-                break;
-              // 海底無し
-              case 2:
-                yakoutput(yk, yak);
-                break;
-              }
+              haiteichose(yk,yak,tumoflag,rinflag);
               break;
             }
             break;
 
           // 役決定
           case 3:
-            yakflag = 0;
-            yakflag = haiteiflag(yakflag);
-            std::cout << "海底フラグ" << yakflag << std::endl;
 
-            switch (yakflag) {
-            // 海底あり
-            case 1:
-              if (tumoflag == 1) {
-                yk[7] = haitei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              } else {
-                yk[7] = houtei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              }
-              break;
-            // 海底無し
-            case 2:
-              yakoutput(yk, yak);
-              break;
-            }
+            haiteichose(yk,yak,tumoflag,rinflag);
             break;
           }
           break;
         // 役決定
         case 3:
-          yakflag = 0;
-          yakflag = haiteiflag(yakflag);
-          std::cout << "海底フラグ" << yakflag << std::endl;
 
-          switch (yakflag) {
-          // 海底あり
-          case 1:
-            if (tumoflag == 1) {
-              yk[7] = haitei;
-              yak = yakadd(yak, 1);
-
-              yakoutput(yk, yak);
-            } else {
-              yk[7] = houtei;
-              yak = yakadd(yak, 1);
-
-              yakoutput(yk, yak);
-            }
-            break;
-          // 海底無し
-          case 2:
-            yakoutput(yk, yak);
-            break;
-          }
+          haiteichose(yk,yak,tumoflag,rinflag);
           break;
         }
         break;
@@ -2419,30 +1398,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
           case 1:
             yk[7] = tinitu;
             yak = yakadd(yak, 6);
-            yakflag = 0;
-            yakflag = haiteiflag(yakflag);
-            std::cout << "海底フラグ" << yakflag << std::endl;
 
-            switch (yakflag) {
-              // 海底あり
-            case 1:
-              if (tumoflag == 1) {
-                yk[8] = haitei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              } else {
-                yk[8] = houtei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              }
-              break;
-              // 海底無し
-            case 2:
-              yakoutput(yk, yak);
-              break;
-            }
+            haiteichose(yk,yak,tumoflag,rinflag);
             break;
 
             // 清一色無し
@@ -2468,83 +1425,23 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
 
               case 2:
               case 3:
-                yakflag = haiteiflag(yakflag);
 
-                switch (yakflag) {
-                // 海底あり
-                case 1:
-                  if (tumoflag == 1) {
-                    yk[9] = haitei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  } else {
-                    yk[9] = houtei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  }
-                  break;
-                  // 海底無し
-                case 2:
-                  yakoutput(yk, yak);
-                  break;
-                }
+                haiteichose(yk,yak,tumoflag,rinflag);
                 break;
               }
               break;
 
               // 役決定
             case 3:
-              yakflag = haiteiflag(yakflag);
 
-              switch (yakflag) {
-                // 海底あり
-              case 1:
-                if (tumoflag == 1) {
-                  yk[7] = haitei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                } else {
-                  yk[7] = houtei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                }
-                break;
-                // 海底無し
-              case 2:
-                yakoutput(yk, yak);
-                break;
-              }
+              haiteichose(yk,yak,tumoflag,rinflag);
               break;
             }
             break;
           // 役決定
           case 3:
-            yakflag = haiteiflag(yakflag);
 
-            switch (yakflag) {
-              // 海底あり
-            case 1:
-              if (tumoflag == 1) {
-                yk[7] = haitei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              } else {
-                yk[7] = houtei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              }
-              break;
-              // 海底無し
-            case 2:
-              yakoutput(yk, yak);
-              break;
-            }
+            haiteichose(yk,yak,tumoflag,rinflag);
             break;
           }
           break;
@@ -2553,7 +1450,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
         case 2:
           yakflag = 0;
           yakflag = rinshanflag(tumoflag);
-          // std::cout<<"嶺上開花フラグ"<<yakflag<<std::endl;
+          std::cout<<"嶺上開花フラグ"<<yakflag<<std::endl;
 
           switch (yakflag) {
           case 1:
@@ -2563,7 +1460,7 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
           case 2:
             yakflag = 0;
             yakflag = tinituflag(yakflag);
-            // std::cout<<"清一色フラグ"<<yakflag<<std::endl;
+            std::cout<<"清一色フラグ"<<yakflag<<std::endl;
 
             switch (yakflag) {
             case 1:
@@ -2594,28 +1491,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                     yak = yakadd(yak, 2);
                   case 2:
                   case 3:
-                    yakflag = haiteiflag(yakflag);
-                    std::cout << "海底フラグ" << yakflag << std::endl;
-
-                    switch (yakflag) {
-                      // 海底あり
-                    case 1:
-                      if ((tumoflag == 1) && (rinflag < 1)) {
-                        yk[9] = haitei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      } else if ((tumoflag < 1) && (rinflag < 1)) {
-                        yk[9] = houtei;
-                        yak = yakadd(yak, 1);
-                        yakoutput(yk, yak);
-                      }
-                      break;
-                    // 海底無し
-                    case 2:
-                      yakoutput(yk, yak);
-                      break;
-                    }
+                   
+                    haiteichose(yk,yak,tumoflag,rinflag);
                     break;
                   }
                 }
@@ -2641,30 +1518,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                     yak = yakadd(yak, 2);
                   case 2:
                   case 3:
-                    yakflag = haiteiflag(yakflag);
-                    std::cout << "海底フラグ" << yakflag << std::endl;
-
-                    switch (yakflag) {
-                      // 海底あり
-                    case 1:
-                      if ((tumoflag == 1) && (rinflag < 1)) {
-                        yk[9] = haitei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      } else if ((tumoflag < 1) && (rinflag < 1)) {
-                        yk[9] = houtei;
-                        yak = yakadd(yak, 1);
-                        yakoutput(yk, yak);
-                      } else {
-                        yakoutput(yk, yak);
-                      }
-                      break;
-                    // 海底無し
-                    case 2:
-                      yakoutput(yk, yak);
-                      break;
-                    }
+                  
+                    haiteichose(yk,yak,tumoflag,rinflag);
                     break;
                   }
 
@@ -2682,86 +1537,22 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
 
                   case 2:
                   case 3:
-                    yakflag = haiteiflag(yakflag);
-                    std::cout << "海底フラグ" << yakflag << std::endl;
-
-                    switch (yakflag) {
-                      // 海底あり
-                    case 1:
-                      if ((tumoflag == 1) && (rinflag < 1)) {
-                        yk[7] = haitei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      } else if ((tumoflag < 1) && (rinflag < 1)) {
-                        yk[7] = houtei;
-                        yak = yakadd(yak, 1);
-                        yakoutput(yk, yak);
-                      } else {
-                        yakoutput(yk, yak);
-                      }
-                      break;
-                    // 海底無し
-                    case 2:
-                      yakoutput(yk, yak);
-                      break;
-                    }
+                  
+                    haiteichose(yk,yak,tumoflag,rinflag);
                     break;
                   }
                   break;
 
                 case 3:
-                  yakflag = haiteiflag(yakflag);
-                  std::cout << "海底フラグ" << yakflag << std::endl;
-
-                  switch (yakflag) {
-                    // 海底あり
-                  case 1:
-                    if ((tumoflag == 1) && (rinflag < 1)) {
-                      yk[7] = haitei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    } else if ((tumoflag < 1) && (rinflag < 1)) {
-                      yk[7] = houtei;
-                      yak = yakadd(yak, 1);
-                      yakoutput(yk, yak);
-                    } else {
-                      yakoutput(yk, yak);
-                    }
-                    break;
-                  // 海底無し
-                  case 2:
-                    yakoutput(yk, yak);
-                    break;
-                  }
+                  
+                  haiteichose(yk,yak,tumoflag,rinflag);
                   break;
                 }
                 break;
 
               case 3:
-                yakflag = haiteiflag(yakflag);
-                std::cout << "海底フラグ" << yakflag << std::endl;
-
-                switch (yakflag) {
-                  // 海底あり
-                case 1:
-                  if ((tumoflag == 1) && (rinflag == 0)) {
-                    yk[7] = haitei;
-                    yak = yakadd(yak, 1);
-
-                    yakoutput(yk, yak);
-                  } else if ((tumoflag == 0) && (rinflag == 0)) {
-                    yk[7] = houtei;
-                    yak = yakadd(yak, 1);
-                    yakoutput(yk, yak);
-                  }
-                  break;
-                // 海底無し
-                case 2:
-                  yakoutput(yk, yak);
-                  break;
-                }
+                
+                haiteichose(yk,yak,tumoflag,rinflag);
                 break;
               }
               break;
@@ -2785,28 +1576,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                   yk[6] = ryanpeko;
                   yak = yakadd(yak, 3);
 
-                  yakflag = haiteiflag(yakflag);
-                  std::cout << "海底フラグ" << yakflag << std::endl;
-
-                  switch (yakflag) {
-                    // 海底あり
-                  case 1:
-                    if ((tumoflag == 1) && (rinflag == 0)) {
-                      yk[7] = haitei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    } else if ((tumoflag == 0) && (rinflag == 0)) {
-                      yk[7] = houtei;
-                      yak = yakadd(yak, 1);
-                      yakoutput(yk, yak);
-                    }
-                    break;
-                  // 海底無し
-                  case 2:
-                    yakoutput(yk, yak);
-                    break;
-                  }
+                  
+                  haiteichose(yk,yak,tumoflag,rinflag);
                   break;
 
                 case 2:
@@ -2857,53 +1628,13 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                             yak = yakadd(yak, 2);
                           }
 
-                          yakflag = haiteiflag(yakflag);
-                          std::cout << "海底フラグ" << yakflag << std::endl;
-
-                          switch (yakflag) {
-                            // 海底あり
-                          case 1:
-                            if ((tumoflag == 1) && (rinflag < 1)) {
-                              yk[0] = haitei;
-                              yak = yakadd(yak, 1);
-
-                              yakoutput(yk, yak);
-                            } else if ((tumoflag == 0) && (rinflag < 1)) {
-                              yk[0] = houtei;
-                              yak = yakadd(yak, 1);
-                              yakoutput(yk, yak);
-                            }
-                            break;
-                          // 海底無し
-                          case 2:
-                            yakoutput(yk, yak);
-                            break;
-                          }
+                          
+                          haiteichose(yk,yak,tumoflag,rinflag);
                           break;
 
                         case 3:
-                          yakflag = haiteiflag(yakflag);
-                          std::cout << "海底フラグ" << yakflag << std::endl;
-
-                          switch (yakflag) {
-                            // 海底あり
-                          case 1:
-                            if ((tumoflag == 1) && (rinflag < 1)) {
-                              yk[8] = haitei;
-                              yak = yakadd(yak, 1);
-
-                              yakoutput(yk, yak);
-                            } else if ((tumoflag == 0) && (rinflag < 1)) {
-                              yk[8] = houtei;
-                              yak = yakadd(yak, 1);
-                              yakoutput(yk, yak);
-                            }
-                            break;
-                          // 海底無し
-                          case 2:
-                            yakoutput(yk, yak);
-                            break;
-                          }
+                       
+                          haiteichose(yk,yak,tumoflag,rinflag);
                           break;
                         }
                         break;
@@ -2934,80 +1665,20 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                             yak = yakadd(yak, 2);
                           }
 
-                          yakflag = haiteiflag(yakflag);
-                          std::cout << "海底フラグ" << yakflag << std::endl;
-
-                          switch (yakflag) {
-                            // 海底あり
-                          case 1:
-                            if ((tumoflag == 1) && (rinflag < 1)) {
-                              yk[0] = haitei;
-                              yak = yakadd(yak, 1);
-
-                              yakoutput(yk, yak);
-                            } else if ((tumoflag == 0) && (rinflag < 1)) {
-                              yk[0] = houtei;
-                              yak = yakadd(yak, 1);
-                              yakoutput(yk, yak);
-                            }
-                            break;
-                          // 海底無し
-                          case 2:
-                            yakoutput(yk, yak);
-                            break;
-                          }
+                          
+                          haiteichose(yk,yak,tumoflag,rinflag);
                           break;
 
                         case 3:
-                          yakflag = haiteiflag(yakflag);
-                          std::cout << "海底フラグ" << yakflag << std::endl;
-
-                          switch (yakflag) {
-                            // 海底あり
-                          case 1:
-                            if ((tumoflag == 1) && (rinflag < 1)) {
-                              yk[8] = haitei;
-                              yak = yakadd(yak, 1);
-
-                              yakoutput(yk, yak);
-                            } else if ((tumoflag == 0) && (rinflag < 1)) {
-                              yk[8] = houtei;
-                              yak = yakadd(yak, 1);
-                              yakoutput(yk, yak);
-                            }
-                            break;
-                          // 海底無し
-                          case 2:
-                            yakoutput(yk, yak);
-                            break;
-                          }
+                         
+                          haiteichose(yk,yak,tumoflag,rinflag);
                           break;
                         }
                         break;
 
                       case 3:
-                        yakflag = haiteiflag(yakflag);
-                        std::cout << "海底フラグ" << yakflag << std::endl;
-
-                        switch (yakflag) {
-                          // 海底あり
-                        case 1:
-                          if ((tumoflag == 1) && (rinflag < 1)) {
-                            yk[8] = haitei;
-                            yak = yakadd(yak, 1);
-
-                            yakoutput(yk, yak);
-                          } else if ((tumoflag == 0) && (rinflag < 1)) {
-                            yk[8] = houtei;
-                            yak = yakadd(yak, 1);
-                            yakoutput(yk, yak);
-                          }
-                          break;
-                        // 海底無し
-                        case 2:
-                          yakoutput(yk, yak);
-                          break;
-                        }
+                      
+                        haiteichose(yk,yak,tumoflag,rinflag);
                         break;
                       }
                     }
@@ -3020,40 +1691,111 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                     yakflag = sanankoflag(yakflag);
 
                     switch (yakflag) {
+                    //三暗刻有
                     case 1:
                       yk[5] = sananko;
                       yak = yakadd(yak, 2);
 
                       yakflag = 0;
                       yakflag = sankantuflag(yakflag);
+                      std::cout<<"三槓子フラグ"<<yakflag<<std::endl;
 
                       switch (yakflag) {
+                      //三槓子有
                       case 1:
                         yk[6] = sankantu;
                         yak = yakadd(yak, 2);
+                      //三槓子無
                       case 2:
                         yakflag = 0;
                         yakflag = tyantaflag(yakflag);
+                        std::cout<<"チャンタフラグ"<<yakflag<<std::endl;
 
                         switch (yakflag) {
+                        //チャンタ有
                         case 1:
                           yk[7] = tyanta;
                           yak = yakadd(yak, 2);
+                        //チャンタ無
                         case 2:
                           yakflag = 0;
                           yakflag = shosangenflag(yakflag);
+                          std::cout<<"小三元フラグ"<<yakflag<<std::endl;
+
+                          switch (yakflag) {
+                            //小三元有
+                            case 1:
+                            yk[8]=shosangen;
+                            yk[9]=sangen;
+                            yk[10]=sangen;
+                            yak = yakadd(yak,4);
+
+                            hakuflag=sangenhai();
+                            if(hakuflag==1){
+                              tyunflag=sangenhai();
+
+                              if(tyunflag==0){
+                                hatuflag=1;
+                              }
+                            }else if(hakuflag==0){
+                              tyunflag=1;
+                              hatuflag=1;
+                            }
+
+                            yakflag=0;
+                            yakflag=kazehaiflag(oyaflag);
+                            std::cout<<"風牌フラグ"<<yakflag<<std::endl;
+
+                            switch (yakflag) {
+                              case 1:
+                              yk[11]=jikaze;
+                              yak=yakadd(yak,1);
+
+                              haiteichose(yk,yak,tumoflag,rinflag);
+                              break;
+
+                              case 2:
+                              yk[11]=bakaze;
+                              yak=yakadd(yak,1);
+
+                              haiteichose(yk,yak,tumoflag,rinflag);
+
+                              break;
+
+                              case 3:
+                                yk[11]=jikaze;
+                                yk[12]=bakaze;
+                                yak=yakadd(yak,2);
+
+                                haiteichose(yk,yak,tumoflag,rinflag);
+
+                              break;
+
+                              case 4:
+                                haiteichose(yk,yak,tumoflag,rinflag);
+                              break;
+                            
+                            }
+                            break;
+
+                            case 2:
+                            
+                            break;
+                          }
+
 
                           //ここからつづき
 
                           break;
 
                         case 3:
+                          haiteichose(yk,yak,tumoflag,rinflag);
                         break;
                         }
                         break;
                       }
                       break;
-
+                    //三暗刻無
                     case 2:
                       yakflag = 0;
                       yakflag = shosangenflag(yakflag);
@@ -3089,56 +1831,16 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                               yk[11] = jikaze;
                               yak = yakadd(yak, 1);
 
-                              yakflag = haiteiflag(yakflag);
-                              std::cout << "海底フラグ" << yakflag << std::endl;
-
-                              switch (yakflag) {
-                                // 海底あり
-                              case 1:
-                                if ((tumoflag == 1) && (rinflag < 1)) {
-                                  yk[12] = haitei;
-                                  yak = yakadd(yak, 1);
-
-                                  yakoutput(yk, yak);
-                                } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                  yk[12] = houtei;
-                                  yak = yakadd(yak, 1);
-                                  yakoutput(yk, yak);
-                                }
-                                break;
-                              // 海底無し
-                              case 2:
-                                yakoutput(yk, yak);
-                                break;
-                              }
+                              
+                              haiteichose(yk,yak,tumoflag,rinflag);
                               break;
 
                             case 2:
                               yk[11] = bakaze;
                               yak = yakadd(yak, 1);
 
-                              yakflag = haiteiflag(yakflag);
-                              std::cout << "海底フラグ" << yakflag << std::endl;
-
-                              switch (yakflag) {
-                                // 海底あり
-                              case 1:
-                                if ((tumoflag == 1) && (rinflag < 1)) {
-                                  yk[12] = haitei;
-                                  yak = yakadd(yak, 1);
-
-                                  yakoutput(yk, yak);
-                                } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                  yk[12] = houtei;
-                                  yak = yakadd(yak, 1);
-                                  yakoutput(yk, yak);
-                                }
-                                break;
-                              // 海底無し
-                              case 2:
-                                yakoutput(yk, yak);
-                                break;
-                              }
+                            
+                              haiteichose(yk,yak,tumoflag,rinflag);
                               break;
 
                             case 3:
@@ -3146,81 +1848,21 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                               yk[12] = bakaze;
                               yak = yakadd(yak, 2);
 
-                              yakflag = haiteiflag(yakflag);
-                              std::cout << "海底フラグ" << yakflag << std::endl;
-
-                              switch (yakflag) {
-                                // 海底あり
-                              case 1:
-                                if ((tumoflag == 1) && (rinflag < 1)) {
-                                  yk[0] = haitei;
-                                  yak = yakadd(yak, 1);
-
-                                  yakoutput(yk, yak);
-                                } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                  yk[0] = houtei;
-                                  yak = yakadd(yak, 1);
-                                  yakoutput(yk, yak);
-                                }
-                                break;
-                              // 海底無し
-                              case 2:
-                                yakoutput(yk, yak);
-                                break;
-                              }
+                              
+                              haiteichose(yk,yak,tumoflag,rinflag);
                               break;
 
                             case 4:
-                              yakflag = haiteiflag(yakflag);
-                              std::cout << "海底フラグ" << yakflag << std::endl;
-
-                              switch (yakflag) {
-                                // 海底あり
-                              case 1:
-                                if ((tumoflag == 1) && (rinflag < 1)) {
-                                  yk[11] = haitei;
-                                  yak = yakadd(yak, 1);
-
-                                  yakoutput(yk, yak);
-                                } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                  yk[11] = houtei;
-                                  yak = yakadd(yak, 1);
-                                  yakoutput(yk, yak);
-                                }
-                                break;
-                              // 海底無し
-                              case 2:
-                                yakoutput(yk, yak);
-                                break;
-                              }
+                             
+                              haiteichose(yk,yak,tumoflag,rinflag);
                               break;
                             }
 
                             break;
 
                           case 3:
-                            yakflag = haiteiflag(yakflag);
-                            std::cout << "海底フラグ" << yakflag << std::endl;
-
-                            switch (yakflag) {
-                              // 海底あり
-                            case 1:
-                              if ((tumoflag == 1) && (rinflag < 1)) {
-                                yk[8] = haitei;
-                                yak = yakadd(yak, 1);
-
-                                yakoutput(yk, yak);
-                              } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                yk[8] = houtei;
-                                yak = yakadd(yak, 1);
-                                yakoutput(yk, yak);
-                              }
-                              break;
-                            // 海底無し
-                            case 2:
-                              yakoutput(yk, yak);
-                              break;
-                            }
+                            
+                            haiteichose(yk,yak,tumoflag,rinflag);
                             break;
                           }
                           break;
@@ -3242,56 +1884,16 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                               yk[11] = jikaze;
                               yak = yakadd(yak, 1);
 
-                              yakflag = haiteiflag(yakflag);
-                              std::cout << "海底フラグ" << yakflag << std::endl;
-
-                              switch (yakflag) {
-                                // 海底あり
-                              case 1:
-                                if ((tumoflag == 1) && (rinflag < 1)) {
-                                  yk[12] = haitei;
-                                  yak = yakadd(yak, 1);
-
-                                  yakoutput(yk, yak);
-                                } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                  yk[12] = houtei;
-                                  yak = yakadd(yak, 1);
-                                  yakoutput(yk, yak);
-                                }
-                                break;
-                              // 海底無し
-                              case 2:
-                                yakoutput(yk, yak);
-                                break;
-                              }
+                             
+                              haiteichose(yk,yak,tumoflag,rinflag);
                               break;
 
                             case 2:
                               yk[11] = bakaze;
                               yak = yakadd(yak, 1);
 
-                              yakflag = haiteiflag(yakflag);
-                              std::cout << "海底フラグ" << yakflag << std::endl;
-
-                              switch (yakflag) {
-                                // 海底あり
-                              case 1:
-                                if ((tumoflag == 1) && (rinflag < 1)) {
-                                  yk[12] = haitei;
-                                  yak = yakadd(yak, 1);
-
-                                  yakoutput(yk, yak);
-                                } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                  yk[12] = houtei;
-                                  yak = yakadd(yak, 1);
-                                  yakoutput(yk, yak);
-                                }
-                                break;
-                              // 海底無し
-                              case 2:
-                                yakoutput(yk, yak);
-                                break;
-                              }
+                              
+                              haiteichose(yk,yak,tumoflag,rinflag);
                               break;
 
                             case 3:
@@ -3299,108 +1901,28 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                               yk[12] = bakaze;
                               yak = yakadd(yak, 2);
 
-                              yakflag = haiteiflag(yakflag);
-                              std::cout << "海底フラグ" << yakflag << std::endl;
-
-                              switch (yakflag) {
-                                // 海底あり
-                              case 1:
-                                if ((tumoflag == 1) && (rinflag < 1)) {
-                                  yk[0] = haitei;
-                                  yak = yakadd(yak, 1);
-
-                                  yakoutput(yk, yak);
-                                } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                  yk[0] = houtei;
-                                  yak = yakadd(yak, 1);
-                                  yakoutput(yk, yak);
-                                }
-                                break;
-                              // 海底無し
-                              case 2:
-                                yakoutput(yk, yak);
-                                break;
-                              }
+                              
+                              haiteichose(yk,yak,tumoflag,rinflag);
                               break;
 
                             case 4:
-                              yakflag = haiteiflag(yakflag);
-                              std::cout << "海底フラグ" << yakflag << std::endl;
-
-                              switch (yakflag) {
-                                // 海底あり
-                              case 1:
-                                if ((tumoflag == 1) && (rinflag < 1)) {
-                                  yk[11] = haitei;
-                                  yak = yakadd(yak, 1);
-
-                                  yakoutput(yk, yak);
-                                } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                  yk[11] = houtei;
-                                  yak = yakadd(yak, 1);
-                                  yakoutput(yk, yak);
-                                }
-                                break;
-                              // 海底無し
-                              case 2:
-                                yakoutput(yk, yak);
-                                break;
-                              }
+                             
+                              haiteichose(yk,yak,tumoflag,rinflag);
                               break;
                             }
 
                             break;
 
                           case 3:
-                            yakflag = haiteiflag(yakflag);
-                            std::cout << "海底フラグ" << yakflag << std::endl;
-
-                            switch (yakflag) {
-                              // 海底あり
-                            case 1:
-                              if ((tumoflag == 1) && (rinflag < 1)) {
-                                yk[8] = haitei;
-                                yak = yakadd(yak, 1);
-
-                                yakoutput(yk, yak);
-                              } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                yk[8] = houtei;
-                                yak = yakadd(yak, 1);
-                                yakoutput(yk, yak);
-                              }
-                              break;
-                            // 海底無し
-                            case 2:
-                              yakoutput(yk, yak);
-                              break;
-                            }
+                           
+                            haiteichose(yk,yak,tumoflag,rinflag);
                             break;
                           }
                           break;
 
                         case 3:
-                          yakflag = haiteiflag(yakflag);
-                          std::cout << "海底フラグ" << yakflag << std::endl;
-
-                          switch (yakflag) {
-                            // 海底あり
-                          case 1:
-                            if ((tumoflag == 1) && (rinflag < 1)) {
-                              yk[8] = haitei;
-                              yak = yakadd(yak, 1);
-
-                              yakoutput(yk, yak);
-                            } else if ((tumoflag == 0) && (rinflag < 1)) {
-                              yk[8] = houtei;
-                              yak = yakadd(yak, 1);
-                              yakoutput(yk, yak);
-                            }
-                            break;
-                          // 海底無し
-                          case 2:
-                            yakoutput(yk, yak);
-                            break;
-                          }
+                         
+                          haiteichose(yk,yak,tumoflag,rinflag);
                           break;
                         }
                         break;
@@ -3449,54 +1971,13 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                   tyunflag = 1;
                                 }
 
-                                yakflag = haiteiflag(yakflag);
-                                std::cout << "海底フラグ" << yakflag
-                                          << std::endl;
-
-                                switch (yakflag) {
-                                  // 海底あり
-                                case 1:
-                                  if ((tumoflag == 1) && (rinflag < 1)) {
-                                    yk[9] = haitei;
-                                    yak = yakadd(yak, 1);
-
-                                    yakoutput(yk, yak);
-                                  } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                    yk[9] = houtei;
-                                    yak = yakadd(yak, 1);
-                                    yakoutput(yk, yak);
-                                  }
-                                  break;
-                                // 海底無し
-                                case 2:
-                                  yakoutput(yk, yak);
-                                  break;
-                                }
+                               
+                                haiteichose(yk,yak,tumoflag,rinflag);
                                 break;
 
                               case 4:
-                                yakflag = haiteiflag(yakflag);
-                                std::cout << "海底フラグ" << yakflag
-                                          << std::endl;
-                                switch (yakflag) {
-                                  // 海底あり
-                                case 1:
-                                  if ((tumoflag == 1) && (rinflag < 1)) {
-                                    yk[8] = haitei;
-                                    yak = yakadd(yak, 1);
-
-                                    yakoutput(yk, yak);
-                                  } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                    yk[8] = houtei;
-                                    yak = yakadd(yak, 1);
-                                    yakoutput(yk, yak);
-                                  }
-                                  break;
-                                // 海底無し
-                                case 2:
-                                  yakoutput(yk, yak);
-                                  break;
-                                }
+                                
+                                haiteichose(yk,yak,tumoflag,rinflag);
                                 break;
                               }
                               break;
@@ -3523,54 +2004,13 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                   tyunflag = 1;
                                 }
 
-                                yakflag = haiteiflag(yakflag);
-                                std::cout << "海底フラグ" << yakflag
-                                          << std::endl;
-
-                                switch (yakflag) {
-                                  // 海底あり
-                                case 1:
-                                  if ((tumoflag == 1) && (rinflag < 1)) {
-                                    yk[9] = haitei;
-                                    yak = yakadd(yak, 1);
-
-                                    yakoutput(yk, yak);
-                                  } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                    yk[9] = houtei;
-                                    yak = yakadd(yak, 1);
-                                    yakoutput(yk, yak);
-                                  }
-                                  break;
-                                // 海底無し
-                                case 2:
-                                  yakoutput(yk, yak);
-                                  break;
-                                }
+                             
+                                haiteichose(yk,yak,tumoflag,rinflag);
                                 break;
 
                               case 4:
-                                yakflag = haiteiflag(yakflag);
-                                std::cout << "海底フラグ" << yakflag
-                                          << std::endl;
-                                switch (yakflag) {
-                                  // 海底あり
-                                case 1:
-                                  if ((tumoflag == 1) && (rinflag < 1)) {
-                                    yk[8] = haitei;
-                                    yak = yakadd(yak, 1);
-
-                                    yakoutput(yk, yak);
-                                  } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                    yk[8] = houtei;
-                                    yak = yakadd(yak, 1);
-                                    yakoutput(yk, yak);
-                                  }
-                                  break;
-                                // 海底無し
-                                case 2:
-                                  yakoutput(yk, yak);
-                                  break;
-                                }
+                             
+                                haiteichose(yk,yak,tumoflag,rinflag);
                                 break;
                               }
                               break;
@@ -3598,54 +2038,13 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                   tyunflag = 1;
                                 }
 
-                                yakflag = haiteiflag(yakflag);
-                                std::cout << "海底フラグ" << yakflag
-                                          << std::endl;
-
-                                switch (yakflag) {
-                                  // 海底あり
-                                case 1:
-                                  if ((tumoflag == 1) && (rinflag < 1)) {
-                                    yk[10] = haitei;
-                                    yak = yakadd(yak, 1);
-
-                                    yakoutput(yk, yak);
-                                  } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                    yk[10] = houtei;
-                                    yak = yakadd(yak, 1);
-                                    yakoutput(yk, yak);
-                                  }
-                                  break;
-                                // 海底無し
-                                case 2:
-                                  yakoutput(yk, yak);
-                                  break;
-                                }
+                              
+                                haiteichose(yk,yak,tumoflag,rinflag);
                                 break;
 
                               case 4:
-                                yakflag = haiteiflag(yakflag);
-                                std::cout << "海底フラグ" << yakflag
-                                          << std::endl;
-                                switch (yakflag) {
-                                  // 海底あり
-                                case 1:
-                                  if ((tumoflag == 1) && (rinflag < 1)) {
-                                    yk[10] = haitei;
-                                    yak = yakadd(yak, 1);
-
-                                    yakoutput(yk, yak);
-                                  } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                    yk[10] = houtei;
-                                    yak = yakadd(yak, 1);
-                                    yakoutput(yk, yak);
-                                  }
-                                  break;
-                                // 海底無し
-                                case 2:
-                                  yakoutput(yk, yak);
-                                  break;
-                                }
+                                
+                                haiteichose(yk,yak,tumoflag,rinflag);
                                 break;
                               }
                               break;
@@ -3688,87 +2087,22 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                     tyunflag = 1;
                                   }
 
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[9] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[9] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                                 
+                                  haiteichose(yk,yak,tumoflag,rinflag);
 
                                   break;
 
                                 case 4:
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[8] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[8] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                                  
+                                  haiteichose(yk,yak,tumoflag,rinflag);
                                   break;
                                 }
 
                                 break;
 
                               case 4:
-                                yakflag = haiteiflag(yakflag);
-                                std::cout << "海底フラグ" << yakflag
-                                          << std::endl;
-
-                                switch (yakflag) {
-                                  // 海底あり
-                                case 1:
-                                  if ((tumoflag == 1) && (rinflag < 1)) {
-                                    yk[7] = haitei;
-                                    yak = yakadd(yak, 1);
-
-                                    yakoutput(yk, yak);
-                                  } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                    yk[7] = houtei;
-                                    yak = yakadd(yak, 1);
-                                    yakoutput(yk, yak);
-                                  }
-                                  break;
-                                // 海底無し
-                                case 2:
-                                  yakoutput(yk, yak);
-                                  break;
-                                }
+                               
+                                haiteichose(yk,yak,tumoflag,rinflag);
                                 break;
                               }
                               break;
@@ -3830,89 +2164,20 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                       tyunflag = 1;
                                     }
 
-                                    yakflag = 0;
-                                    yakflag = haiteiflag(yakflag);
-                                    std::cout << "海底フラグ" << yakflag
-                                              << std::endl;
-
-                                    switch (yakflag) {
-                                      // 海底あり
-                                    case 1:
-                                      if ((tumoflag == 1) && (rinflag < 1)) {
-                                        yk[10] = haitei;
-                                        yak = yakadd(yak, 1);
-
-                                        yakoutput(yk, yak);
-                                      } else if ((tumoflag == 0) &&
-                                                 (rinflag < 1)) {
-                                        yk[10] = houtei;
-                                        yak = yakadd(yak, 1);
-                                        yakoutput(yk, yak);
-                                      }
-                                      break;
-                                    // 海底無し
-                                    case 2:
-                                      yakoutput(yk, yak);
-                                      break;
-                                    }
+                                    
+                                    haiteichose(yk,yak,tumoflag,rinflag);
                                     break;
 
                                   case 4:
-                                    yakflag = 0;
-                                    yakflag = haiteiflag(yakflag);
-                                    std::cout << "海底フラグ" << yakflag
-                                              << std::endl;
-
-                                    switch (yakflag) {
-                                      // 海底あり
-                                    case 1:
-                                      if ((tumoflag == 1) && (rinflag < 1)) {
-                                        yk[10] = haitei;
-                                        yak = yakadd(yak, 1);
-
-                                        yakoutput(yk, yak);
-                                      } else if ((tumoflag == 0) &&
-                                                 (rinflag < 1)) {
-                                        yk[10] = houtei;
-                                        yak = yakadd(yak, 1);
-                                        yakoutput(yk, yak);
-                                      }
-                                      break;
-                                    // 海底無し
-                                    case 2:
-                                      yakoutput(yk, yak);
-                                      break;
-                                    }
+                                   
+                                    haiteichose(yk,yak,tumoflag,rinflag);
                                     break;
                                   }
                                   break;
 
                                 case 4:
-                                  yakflag = 0;
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[8] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[8] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                                 
+                                  haiteichose(yk,yak,tumoflag,rinflag);
                                   break;
                                 }
 
@@ -3960,59 +2225,13 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                       tyunflag = 1;
                                     }
 
-                                    yakflag = 0;
-                                    yakflag = haiteiflag(yakflag);
-                                    std::cout << "海底フラグ" << yakflag
-                                              << std::endl;
-
-                                    switch (yakflag) {
-                                      // 海底あり
-                                    case 1:
-                                      if ((tumoflag == 1) && (rinflag < 1)) {
-                                        yk[10] = haitei;
-                                        yak = yakadd(yak, 1);
-
-                                        yakoutput(yk, yak);
-                                      } else if ((tumoflag == 0) &&
-                                                 (rinflag < 1)) {
-                                        yk[10] = houtei;
-                                        yak = yakadd(yak, 1);
-                                        yakoutput(yk, yak);
-                                      }
-                                      break;
-                                    // 海底無し
-                                    case 2:
-                                      yakoutput(yk, yak);
-                                      break;
-                                    }
+                                   
+                                    haiteichose(yk,yak,tumoflag,rinflag);
                                     break;
 
                                   case 4:
-                                    yakflag = 0;
-                                    yakflag = haiteiflag(yakflag);
-                                    std::cout << "海底フラグ" << yakflag
-                                              << std::endl;
-
-                                    switch (yakflag) {
-                                      // 海底あり
-                                    case 1:
-                                      if ((tumoflag == 1) && (rinflag < 1)) {
-                                        yk[9] = haitei;
-                                        yak = yakadd(yak, 1);
-
-                                        yakoutput(yk, yak);
-                                      } else if ((tumoflag == 0) &&
-                                                 (rinflag < 1)) {
-                                        yk[9] = houtei;
-                                        yak = yakadd(yak, 1);
-                                        yakoutput(yk, yak);
-                                      }
-                                      break;
-                                    // 海底無し
-                                    case 2:
-                                      yakoutput(yk, yak);
-                                      break;
-                                    }
+                                    
+                                    haiteichose(yk,yak,tumoflag,rinflag);
                                     break;
                                   }
 
@@ -4021,29 +2240,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                 break;
 
                               case 4:
-                                yakflag = 0;
-                                yakflag = haiteiflag(yakflag);
-                                std::cout << "海底フラグ" << yakflag
-                                          << std::endl;
-                                switch (yakflag) {
-                                // 海底あり
-                                case 1:
-                                  if ((tumoflag == 1) && (rinflag < 1)) {
-                                    yk[8] = haitei;
-                                    yak = yakadd(yak, 1);
-
-                                    yakoutput(yk, yak);
-                                  } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                    yk[8] = houtei;
-                                    yak = yakadd(yak, 1);
-                                    yakoutput(yk, yak);
-                                  }
-                                  break;
-                                  // 海底無し
-                                case 2:
-                                  yakoutput(yk, yak);
-                                  break;
-                                }
+                                
+                                haiteichose(yk,yak,tumoflag,rinflag);
                                 break;
                               }
                               break;
@@ -4098,64 +2296,20 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                       tyunflag = 1;
                                     }
 
+                                    haiteichose(yk,yak,tumoflag,rinflag);
+
                                     break;
 
                                   case 4:
-                                    yakflag = 0;
-                                    yakflag = haiteiflag(yakflag);
-                                    std::cout << "海底フラグ" << yakflag
-                                              << std::endl;
-
-                                    switch (yakflag) {
-                                      // 海底あり
-                                    case 1:
-                                      if ((tumoflag == 1) && (rinflag < 1)) {
-                                        yk[10] = haitei;
-                                        yak = yakadd(yak, 1);
-
-                                        yakoutput(yk, yak);
-                                      } else if ((tumoflag == 0) &&
-                                                 (rinflag < 1)) {
-                                        yk[10] = houtei;
-                                        yak = yakadd(yak, 1);
-                                        yakoutput(yk, yak);
-                                      }
-                                      break;
-                                    // 海底無し
-                                    case 2:
-                                      yakoutput(yk, yak);
-                                      break;
-                                    }
+                                   
+                                    haiteichose(yk,yak,tumoflag,rinflag);
                                     break;
                                   }
                                   break;
 
                                 case 4:
-                                  yakflag = 0;
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[7] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[7] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                                  
+                                  haiteichose(yk,yak,tumoflag,rinflag);
                                   break;
                                 }
 
@@ -4203,59 +2357,13 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                       tyunflag = 1;
                                     }
 
-                                    yakflag = 0;
-                                    yakflag = haiteiflag(yakflag);
-                                    std::cout << "海底フラグ" << yakflag
-                                              << std::endl;
-
-                                    switch (yakflag) {
-                                      // 海底あり
-                                    case 1:
-                                      if ((tumoflag == 1) && (rinflag < 1)) {
-                                        yk[9] = haitei;
-                                        yak = yakadd(yak, 1);
-
-                                        yakoutput(yk, yak);
-                                      } else if ((tumoflag == 0) &&
-                                                 (rinflag < 1)) {
-                                        yk[9] = houtei;
-                                        yak = yakadd(yak, 1);
-                                        yakoutput(yk, yak);
-                                      }
-                                      break;
-                                    // 海底無し
-                                    case 2:
-                                      yakoutput(yk, yak);
-                                      break;
-                                    }
+                                    
+                                    haiteichose(yk,yak,tumoflag,rinflag);
                                     break;
 
                                   case 4:
-                                    yakflag = 0;
-                                    yakflag = haiteiflag(yakflag);
-                                    std::cout << "海底フラグ" << yakflag
-                                              << std::endl;
-
-                                    switch (yakflag) {
-                                      // 海底あり
-                                    case 1:
-                                      if ((tumoflag == 1) && (rinflag < 1)) {
-                                        yk[8] = haitei;
-                                        yak = yakadd(yak, 1);
-
-                                        yakoutput(yk, yak);
-                                      } else if ((tumoflag == 0) &&
-                                                 (rinflag < 1)) {
-                                        yk[8] = houtei;
-                                        yak = yakadd(yak, 1);
-                                        yakoutput(yk, yak);
-                                      }
-                                      break;
-                                    // 海底無し
-                                    case 2:
-                                      yakoutput(yk, yak);
-                                      break;
-                                    }
+                                    
+                                    haiteichose(yk,yak,tumoflag,rinflag);
                                     break;
                                   }
 
@@ -4264,29 +2372,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                 break;
 
                               case 4:
-                                yakflag = 0;
-                                yakflag = haiteiflag(yakflag);
-                                std::cout << "海底フラグ" << yakflag
-                                          << std::endl;
-
-                                switch (yakflag) {
-                                  // 海底あり
-                                case 1:
-                                  if ((tumoflag == 1) && (rinflag < 1)) {
-                                    yk[7] = haitei;
-                                    yak = yakadd(yak, 1);
-                                    yakoutput(yk, yak);
-                                  } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                    yk[7] = houtei;
-                                    yak = yakadd(yak, 1);
-                                    yakoutput(yk, yak);
-                                  }
-                                  break;
-                                // 海底無し
-                                case 2:
-                                  yakoutput(yk, yak);
-                                  break;
-                                }
+                                
+                                haiteichose(yk,yak,tumoflag,rinflag);
                                 break;
                               }
                               break;
@@ -4336,119 +2423,30 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                     tyunflag = 1;
                                   }
                                 case 4:
-                                  yakflag = 0;
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[10] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[10] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-
-                                    break;
-                                  }
+                                 
+                                  haiteichose(yk,yak,tumoflag,rinflag);
 
                                   break;
                                 }
                                 break;
 
                               case 4:
-                                yakflag = 0;
-                                yakflag = haiteiflag(yakflag);
-                                std::cout << "海底フラグ" << yakflag
-                                          << std::endl;
-
-                                switch (yakflag) {
-                                  // 海底あり
-                                case 1:
-                                  if ((tumoflag == 1) && (rinflag < 1)) {
-                                    yk[8] = haitei;
-                                    yak = yakadd(yak, 1);
-
-                                    yakoutput(yk, yak);
-                                  } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                    yk[8] = houtei;
-                                    yak = yakadd(yak, 1);
-                                    yakoutput(yk, yak);
-                                  }
-                                  break;
-                                // 海底無し
-                                case 2:
-                                  yakoutput(yk, yak);
-
-                                  break;
-                                }
+                                
+                                haiteichose(yk,yak,tumoflag,rinflag);
                                 break;
                               }
                               break;
 
                             case 4:
-                              yakflag = 0;
-                              yakflag = haiteiflag(yakflag);
-                              std::cout << "海底フラグ" << yakflag << std::endl;
-
-                              switch (yakflag) {
-                                // 海底あり
-                              case 1:
-                                if ((tumoflag == 1) && (rinflag < 1)) {
-                                  yk[7] = haitei;
-                                  yak = yakadd(yak, 1);
-
-                                  yakoutput(yk, yak);
-                                } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                  yk[7] = houtei;
-                                  yak = yakadd(yak, 1);
-                                  yakoutput(yk, yak);
-                                }
-                                break;
-                              // 海底無し
-                              case 2:
-                                yakoutput(yk, yak);
-
-                                break;
-                              }
+                             
+                              haiteichose(yk,yak,tumoflag,rinflag);
 
                               break;
                             }
 
                           case 3:
-                            yakflag = haiteiflag(yakflag);
-                            std::cout << "海底フラグ" << yakflag << std::endl;
-
-                            switch (yakflag) {
-                              // 海底あり
-                            case 1:
-                              if ((tumoflag == 1) && (rinflag < 1)) {
-                                yk[7] = haitei;
-                                yak = yakadd(yak, 1);
-
-                                yakoutput(yk, yak);
-                              } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                yk[7] = houtei;
-                                yak = yakadd(yak, 1);
-                                yakoutput(yk, yak);
-                              }
-                              break;
-                            // 海底無し
-                            case 2:
-                              yakoutput(yk, yak);
-                              break;
-                            }
+                            
+                            haiteichose(yk,yak,tumoflag,rinflag);
                             break;
                           }
                           break;
@@ -4471,28 +2469,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                               yk[6] = ipeko;
                               yak = yakadd(yak, 1);
 
-                              yakflag = haiteiflag(yakflag);
-                              std::cout << "海底フラグ" << yakflag << std::endl;
-
-                              switch (yakflag) {
-                                // 海底あり
-                              case 1:
-                                if ((tumoflag == 1) && (rinflag < 1)) {
-                                  yk[7] = haitei;
-                                  yak = yakadd(yak, 1);
-
-                                  yakoutput(yk, yak);
-                                } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                  yk[7] = houtei;
-                                  yak = yakadd(yak, 1);
-                                  yakoutput(yk, yak);
-                                }
-                                break;
-                              // 海底無し
-                              case 2:
-                                yakoutput(yk, yak);
-                                break;
-                              }
+                              
+                              haiteichose(yk,yak,tumoflag,rinflag);
 
                               break;
 
@@ -4516,29 +2494,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                   yak = yakadd(yak, 2);
                                 }
 
-                                yakflag = haiteiflag(yakflag);
-                                std::cout << "海底フラグ" << yakflag
-                                          << std::endl;
-
-                                switch (yakflag) {
-                                  // 海底あり
-                                case 1:
-                                  if ((tumoflag == 1) && (rinflag < 1)) {
-                                    yk[8] = haitei;
-                                    yak = yakadd(yak, 1);
-
-                                    yakoutput(yk, yak);
-                                  } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                    yk[8] = houtei;
-                                    yak = yakadd(yak, 1);
-                                    yakoutput(yk, yak);
-                                  }
-                                  break;
-                                // 海底無し
-                                case 2:
-                                  yakoutput(yk, yak);
-                                  break;
-                                }
+                               
+                                haiteichose(yk,yak,tumoflag,rinflag);
                                 break;
 
                               case 4:
@@ -4559,58 +2516,14 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                   } else if (yakflag == 3) {
                                     tyunflag = 1;
                                   }
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[7] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[7] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                                  
+                                  haiteichose(yk,yak,tumoflag,rinflag);
 
                                   break;
 
                                 case 4:
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[7] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[7] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                                 
+                                  haiteichose(yk,yak,tumoflag,rinflag);
                                   break;
                                 }
                                 break;
@@ -4618,28 +2531,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                               break;
 
                             case 3:
-                              yakflag = haiteiflag(yakflag);
-                              std::cout << "海底フラグ" << yakflag << std::endl;
-
-                              switch (yakflag) {
-                                // 海底あり
-                              case 1:
-                                if ((tumoflag == 1) && (rinflag < 1)) {
-                                  yk[7] = haitei;
-                                  yak = yakadd(yak, 1);
-
-                                  yakoutput(yk, yak);
-                                } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                  yk[7] = houtei;
-                                  yak = yakadd(yak, 1);
-                                  yakoutput(yk, yak);
-                                }
-                                break;
-                              // 海底無し
-                              case 2:
-                                yakoutput(yk, yak);
-                                break;
-                              }
+                              
+                              haiteichose(yk,yak,tumoflag,rinflag);
                               break;
                             }
                             break;
@@ -4681,56 +2574,13 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                     tyunflag = 1;
                                   }
 
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[8] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[8] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                                  
+                                  haiteichose(yk,yak,tumoflag,rinflag);
                                   break;
 
                                 case 4:
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[8] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[8] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                                
+                                  haiteichose(yk,yak,tumoflag,rinflag);
                                   break;
                                 }
                                 break;
@@ -4759,56 +2609,13 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                     tyunflag = 1;
                                   }
 
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[8] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[8] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                                 
+                                  haiteichose(yk,yak,tumoflag,rinflag);
                                   break;
 
                                 case 4:
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[8] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[8] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                                  
+                                  haiteichose(yk,yak,tumoflag,rinflag);
                                   break;
                                 }
                                 break;
@@ -4838,56 +2645,13 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                     tyunflag = 1;
                                   }
 
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[10] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[10] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                               
+                                  haiteichose(yk,yak,tumoflag,rinflag);
                                   break;
 
                                 case 4:
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[10] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[10] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                               
+                                  haiteichose(yk,yak,tumoflag,rinflag);
                                   break;
                                 }
                                 break;
@@ -4930,88 +2694,22 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                       tyunflag = 1;
                                     }
 
-                                    yakflag = haiteiflag(yakflag);
-                                    std::cout << "海底フラグ" << yakflag
-                                              << std::endl;
-
-                                    switch (yakflag) {
-                                      // 海底あり
-                                    case 1:
-                                      if ((tumoflag == 1) && (rinflag < 1)) {
-                                        yk[8] = haitei;
-                                        yak = yakadd(yak, 1);
-
-                                        yakoutput(yk, yak);
-                                      } else if ((tumoflag == 0) &&
-                                                 (rinflag < 1)) {
-                                        yk[8] = houtei;
-                                        yak = yakadd(yak, 1);
-                                        yakoutput(yk, yak);
-                                      }
-                                      break;
-                                    // 海底無し
-                                    case 2:
-                                      yakoutput(yk, yak);
-                                      break;
-                                    }
+                                   
+                                    haiteichose(yk,yak,tumoflag,rinflag);
 
                                     break;
 
                                   case 4:
-                                    yakflag = haiteiflag(yakflag);
-                                    std::cout << "海底フラグ" << yakflag
-                                              << std::endl;
-
-                                    switch (yakflag) {
-                                      // 海底あり
-                                    case 1:
-                                      if ((tumoflag == 1) && (rinflag < 1)) {
-                                        yk[8] = haitei;
-                                        yak = yakadd(yak, 1);
-
-                                        yakoutput(yk, yak);
-                                      } else if ((tumoflag == 0) &&
-                                                 (rinflag < 1)) {
-                                        yk[8] = houtei;
-                                        yak = yakadd(yak, 1);
-                                        yakoutput(yk, yak);
-                                      }
-                                      break;
-                                    // 海底無し
-                                    case 2:
-                                      yakoutput(yk, yak);
-                                      break;
-                                    }
+                                   
+                                    haiteichose(yk,yak,tumoflag,rinflag);
                                     break;
                                   }
 
                                   break;
 
                                 case 4:
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[7] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[7] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                                 
+                                  haiteichose(yk,yak,tumoflag,rinflag);
                                   break;
                                 }
                                 break;
@@ -5073,89 +2771,20 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                         tyunflag = 1;
                                       }
 
-                                      yakflag = 0;
-                                      yakflag = haiteiflag(yakflag);
-                                      std::cout << "海底フラグ" << yakflag
-                                                << std::endl;
-
-                                      switch (yakflag) {
-                                        // 海底あり
-                                      case 1:
-                                        if ((tumoflag == 1) && (rinflag < 1)) {
-                                          yk[10] = haitei;
-                                          yak = yakadd(yak, 1);
-
-                                          yakoutput(yk, yak);
-                                        } else if ((tumoflag == 0) &&
-                                                   (rinflag < 1)) {
-                                          yk[10] = houtei;
-                                          yak = yakadd(yak, 1);
-                                          yakoutput(yk, yak);
-                                        }
-                                        break;
-                                      // 海底無し
-                                      case 2:
-                                        yakoutput(yk, yak);
-                                        break;
-                                      }
+                                      
+                                      haiteichose(yk,yak,tumoflag,rinflag);
                                       break;
 
                                     case 4:
-                                      yakflag = 0;
-                                      yakflag = haiteiflag(yakflag);
-                                      std::cout << "海底フラグ" << yakflag
-                                                << std::endl;
-
-                                      switch (yakflag) {
-                                        // 海底あり
-                                      case 1:
-                                        if ((tumoflag == 1) && (rinflag < 1)) {
-                                          yk[10] = haitei;
-                                          yak = yakadd(yak, 1);
-
-                                          yakoutput(yk, yak);
-                                        } else if ((tumoflag == 0) &&
-                                                   (rinflag < 1)) {
-                                          yk[10] = houtei;
-                                          yak = yakadd(yak, 1);
-                                          yakoutput(yk, yak);
-                                        }
-                                        break;
-                                      // 海底無し
-                                      case 2:
-                                        yakoutput(yk, yak);
-                                        break;
-                                      }
+                                      
+                                      haiteichose(yk,yak,tumoflag,rinflag);
                                       break;
                                     }
                                     break;
 
                                   case 4:
-                                    yakflag = 0;
-                                    yakflag = haiteiflag(yakflag);
-                                    std::cout << "海底フラグ" << yakflag
-                                              << std::endl;
-
-                                    switch (yakflag) {
-                                      // 海底あり
-                                    case 1:
-                                      if ((tumoflag == 1) && (rinflag < 1)) {
-                                        yk[7] = haitei;
-                                        yak = yakadd(yak, 1);
-
-                                        yakoutput(yk, yak);
-                                      } else if ((tumoflag == 0) &&
-                                                 (rinflag < 1)) {
-                                        yk[7] = houtei;
-                                        yak = yakadd(yak, 1);
-                                        yakoutput(yk, yak);
-                                      }
-                                      break;
-                                    // 海底無し
-                                    case 2:
-                                      yakoutput(yk, yak);
-                                      break;
-                                    }
+                                    
+                                    haiteichose(yk,yak,tumoflag,rinflag);
                                     break;
                                   }
 
@@ -5203,59 +2832,12 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                         tyunflag = 1;
                                       }
 
-                                      yakflag = 0;
-                                      yakflag = haiteiflag(yakflag);
-                                      std::cout << "海底フラグ" << yakflag
-                                                << std::endl;
-
-                                      switch (yakflag) {
-                                        // 海底あり
-                                      case 1:
-                                        if ((tumoflag == 1) && (rinflag < 1)) {
-                                          yk[9] = haitei;
-                                          yak = yakadd(yak, 1);
-
-                                          yakoutput(yk, yak);
-                                        } else if ((tumoflag == 0) &&
-                                                   (rinflag < 1)) {
-                                          yk[9] = houtei;
-                                          yak = yakadd(yak, 1);
-                                          yakoutput(yk, yak);
-                                        }
-                                        break;
-                                      // 海底無し
-                                      case 2:
-                                        yakoutput(yk, yak);
-                                        break;
-                                      }
+                                      haiteichose(yk,yak,tumoflag,rinflag);
                                       break;
 
                                     case 4:
-                                      yakflag = 0;
-                                      yakflag = haiteiflag(yakflag);
-                                      std::cout << "海底フラグ" << yakflag
-                                                << std::endl;
-
-                                      switch (yakflag) {
-                                        // 海底あり
-                                      case 1:
-                                        if ((tumoflag == 1) && (rinflag < 1)) {
-                                          yk[8] = haitei;
-                                          yak = yakadd(yak, 1);
-
-                                          yakoutput(yk, yak);
-                                        } else if ((tumoflag == 0) &&
-                                                   (rinflag < 1)) {
-                                          yk[8] = houtei;
-                                          yak = yakadd(yak, 1);
-                                          yakoutput(yk, yak);
-                                        }
-                                        break;
-                                      // 海底無し
-                                      case 2:
-                                        yakoutput(yk, yak);
-                                        break;
-                                      }
+                                    
+                                      haiteichose(yk,yak,tumoflag,rinflag);
                                       break;
                                     }
 
@@ -5264,30 +2846,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                   break;
 
                                 case 4:
-                                  yakflag = 0;
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-                                  switch (yakflag) {
-                                  // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[7] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[7] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                    // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                                  
+                                  haiteichose(yk,yak,tumoflag,rinflag);
                                   break;
                                 }
                                 break;
@@ -5347,60 +2907,15 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                       break;
 
                                     case 4:
-                                      yakflag = haiteiflag(yakflag);
-                                      std::cout << "海底フラグ" << yakflag
-                                                << std::endl;
-
-                                      switch (yakflag) {
-                                        // 海底あり
-                                      case 1:
-                                        if ((tumoflag == 1) && (rinflag < 1)) {
-                                          yk[10] = haitei;
-                                          yak = yakadd(yak, 1);
-
-                                          yakoutput(yk, yak);
-                                        } else if ((tumoflag == 0) &&
-                                                   (rinflag < 1)) {
-                                          yk[10] = houtei;
-                                          yak = yakadd(yak, 1);
-                                          yakoutput(yk, yak);
-                                        }
-                                        break;
-                                      // 海底無し
-                                      case 2:
-                                        yakoutput(yk, yak);
-                                        break;
-                                      }
+                                      
+                                      haiteichose(yk,yak,tumoflag,rinflag);
                                       break;
                                     }
                                     break;
 
                                   case 4:
-                                    yakflag = 0;
-                                    yakflag = haiteiflag(yakflag);
-                                    std::cout << "海底フラグ" << yakflag
-                                              << std::endl;
-
-                                    switch (yakflag) {
-                                      // 海底あり
-                                    case 1:
-                                      if ((tumoflag == 1) && (rinflag < 1)) {
-                                        yk[7] = haitei;
-                                        yak = yakadd(yak, 1);
-
-                                        yakoutput(yk, yak);
-                                      } else if ((tumoflag == 0) &&
-                                                 (rinflag < 1)) {
-                                        yk[7] = houtei;
-                                        yak = yakadd(yak, 1);
-                                        yakoutput(yk, yak);
-                                      }
-                                      break;
-                                    // 海底無し
-                                    case 2:
-                                      yakoutput(yk, yak);
-                                      break;
-                                    }
+                                    
+                                    haiteichose(yk,yak,tumoflag,rinflag);
                                     break;
                                   }
 
@@ -5448,59 +2963,13 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                         tyunflag = 1;
                                       }
 
-                                      yakflag = 0;
-                                      yakflag = haiteiflag(yakflag);
-                                      std::cout << "海底フラグ" << yakflag
-                                                << std::endl;
-
-                                      switch (yakflag) {
-                                        // 海底あり
-                                      case 1:
-                                        if ((tumoflag == 1) && (rinflag < 1)) {
-                                          yk[9] = haitei;
-                                          yak = yakadd(yak, 1);
-
-                                          yakoutput(yk, yak);
-                                        } else if ((tumoflag == 0) &&
-                                                   (rinflag < 1)) {
-                                          yk[9] = houtei;
-                                          yak = yakadd(yak, 1);
-                                          yakoutput(yk, yak);
-                                        }
-                                        break;
-                                      // 海底無し
-                                      case 2:
-                                        yakoutput(yk, yak);
-                                        break;
-                                      }
+                                      
+                                      haiteichose(yk,yak,tumoflag,rinflag);
                                       break;
 
                                     case 4:
-                                      yakflag = 0;
-                                      yakflag = haiteiflag(yakflag);
-                                      std::cout << "海底フラグ" << yakflag
-                                                << std::endl;
-
-                                      switch (yakflag) {
-                                        // 海底あり
-                                      case 1:
-                                        if ((tumoflag == 1) && (rinflag < 1)) {
-                                          yk[8] = haitei;
-                                          yak = yakadd(yak, 1);
-
-                                          yakoutput(yk, yak);
-                                        } else if ((tumoflag == 0) &&
-                                                   (rinflag < 1)) {
-                                          yk[8] = houtei;
-                                          yak = yakadd(yak, 1);
-                                          yakoutput(yk, yak);
-                                        }
-                                        break;
-                                      // 海底無し
-                                      case 2:
-                                        yakoutput(yk, yak);
-                                        break;
-                                      }
+                                     
+                                      haiteichose(yk,yak,tumoflag,rinflag);
                                       break;
                                     }
 
@@ -5509,30 +2978,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                   break;
 
                                 case 4:
-                                  yakflag = 0;
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[7] = haitei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[7] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-                                    break;
-                                  }
+                                 
+                                  haiteichose(yk,yak,tumoflag,rinflag);
                                   break;
                                 }
                                 break;
@@ -5582,285 +3029,74 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
                                       tyunflag = 1;
                                     }
                                   case 4:
-                                    yakflag = 0;
-                                    yakflag = haiteiflag(yakflag);
-                                    std::cout << "海底フラグ" << yakflag
-                                              << std::endl;
-
-                                    switch (yakflag) {
-                                      // 海底あり
-                                    case 1:
-                                      if ((tumoflag == 1) && (rinflag < 1)) {
-                                        yk[10] = haitei;
-                                        yak = yakadd(yak, 1);
-
-                                        yakoutput(yk, yak);
-                                      } else if ((tumoflag == 0) &&
-                                                 (rinflag < 1)) {
-                                        yk[10] = houtei;
-                                        yak = yakadd(yak, 1);
-                                        yakoutput(yk, yak);
-                                      }
-                                      break;
-                                    // 海底無し
-                                    case 2:
-                                      yakoutput(yk, yak);
-
-                                      break;
-                                    }
+                                    
+                                    haiteichose(yk,yak,tumoflag,rinflag);
 
                                     break;
                                   }
                                   break;
 
                                 case 4:
-                                  yakflag = 0;
-                                  yakflag = haiteiflag(yakflag);
-                                  std::cout << "海底フラグ" << yakflag
-                                            << std::endl;
-
-                                  switch (yakflag) {
-                                    // 海底あり
-                                  case 1:
-                                    if ((tumoflag == 1) && (rinflag < 1)) {
-                                      yk[8] = haitei;
-                                      yak = yakadd(yak, 1);
-
-                                      yakoutput(yk, yak);
-                                    } else if ((tumoflag == 0) &&
-                                               (rinflag < 1)) {
-                                      yk[8] = houtei;
-                                      yak = yakadd(yak, 1);
-                                      yakoutput(yk, yak);
-                                    }
-                                    break;
-                                  // 海底無し
-                                  case 2:
-                                    yakoutput(yk, yak);
-
-                                    break;
-                                  }
+                                 
+                                  haiteichose(yk,yak,tumoflag,rinflag);
                                   break;
                                 }
                                 break;
 
                               case 4:
-                                yakflag = 0;
-                                yakflag = haiteiflag(yakflag);
-                                std::cout << "海底フラグ" << yakflag
-                                          << std::endl;
-
-                                switch (yakflag) {
-                                  // 海底あり
-                                case 1:
-                                  if ((tumoflag == 1) && (rinflag < 1)) {
-                                    yk[7] = haitei;
-                                    yak = yakadd(yak, 1);
-
-                                    yakoutput(yk, yak);
-                                  } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                    yk[7] = houtei;
-                                    yak = yakadd(yak, 1);
-                                    yakoutput(yk, yak);
-                                  }
-                                  break;
-                                // 海底無し
-                                case 2:
-                                  yakoutput(yk, yak);
-
-                                  break;
-                                }
+                                
+                                haiteichose(yk,yak,tumoflag,rinflag);
 
                                 break;
                               }
 
                             case 3:
-                              yakflag = haiteiflag(yakflag);
-                              std::cout << "海底フラグ" << yakflag << std::endl;
-
-                              switch (yakflag) {
-                                // 海底あり
-                              case 1:
-                                if ((tumoflag == 1) && (rinflag < 1)) {
-                                  yk[7] = haitei;
-                                  yak = yakadd(yak, 1);
-
-                                  yakoutput(yk, yak);
-                                } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                  yk[7] = houtei;
-                                  yak = yakadd(yak, 1);
-                                  yakoutput(yk, yak);
-                                }
-                                break;
-                              // 海底無し
-                              case 2:
-                                yakoutput(yk, yak);
-                                break;
-                              }
+                             
+                              haiteichose(yk,yak,tumoflag,rinflag);
                               break;
                             }
                             break;
 
                           case 3:
-                            yakflag = haiteiflag(yakflag);
-                            std::cout << "海底フラグ" << yakflag << std::endl;
-
-                            switch (yakflag) {
-                              // 海底あり
-                            case 1:
-                              if ((tumoflag == 1) && (rinflag < 1)) {
-                                yk[7] = haitei;
-                                yak = yakadd(yak, 1);
-
-                                yakoutput(yk, yak);
-                              } else if ((tumoflag == 0) && (rinflag < 1)) {
-                                yk[7] = houtei;
-                                yak = yakadd(yak, 1);
-                                yakoutput(yk, yak);
-                              }
-                              break;
-                            // 海底無し
-                            case 2:
-                              yakoutput(yk, yak);
-                              break;
-                            }
+                           
+                            haiteichose(yk,yak,tumoflag,rinflag);
                             break;
                           }
                           break;
 
                         case 3:
-                          yakflag = haiteiflag(yakflag);
-                          std::cout << "海底フラグ" << yakflag << std::endl;
-
-                          switch (yakflag) {
-                            // 海底あり
-                          case 1:
-                            if ((tumoflag == 1) && (rinflag < 1)) {
-                              yk[7] = haitei;
-                              yak = yakadd(yak, 1);
-
-                              yakoutput(yk, yak);
-                            } else if ((tumoflag == 0) && (rinflag < 1)) {
-                              yk[7] = houtei;
-                              yak = yakadd(yak, 1);
-                              yakoutput(yk, yak);
-                            }
-                            break;
-                          // 海底無し
-                          case 2:
-                            yakoutput(yk, yak);
-                            break;
-                          }
+                          
+                          haiteichose(yk,yak,tumoflag,rinflag);
                           break;
                         }
 
                         break;
 
                       case 3:
-                        yakflag = haiteiflag(yakflag);
-                        std::cout << "海底フラグ" << yakflag << std::endl;
-
-                        switch (yakflag) {
-                          // 海底あり
-                        case 1:
-                          if ((tumoflag == 1) && (rinflag < 1)) {
-                            yk[7] = haitei;
-                            yak = yakadd(yak, 1);
-
-                            yakoutput(yk, yak);
-                          } else if ((tumoflag == 0) && (rinflag < 1)) {
-                            yk[7] = houtei;
-                            yak = yakadd(yak, 1);
-                            yakoutput(yk, yak);
-                          }
-                          break;
-                        // 海底無し
-                        case 2:
-                          yakoutput(yk, yak);
-                          break;
-                        }
+                       
+                        haiteichose(yk,yak,tumoflag,rinflag);
                         break;
                       }
                       break;
 
                     case 3:
-                      yakflag = haiteiflag(yakflag);
-                      std::cout << "海底フラグ" << yakflag << std::endl;
-
-                      switch (yakflag) {
-                        // 海底あり
-                      case 1:
-                        if ((tumoflag == 1) && (rinflag < 1)) {
-                          yk[7] = haitei;
-                          yak = yakadd(yak, 1);
-
-                          yakoutput(yk, yak);
-                        } else if ((tumoflag == 0) && (rinflag < 1)) {
-                          yk[7] = houtei;
-                          yak = yakadd(yak, 1);
-                          yakoutput(yk, yak);
-                        }
-                        break;
-                      // 海底無し
-                      case 2:
-                        yakoutput(yk, yak);
-                        break;
-                      }
+                     
+                      haiteichose(yk,yak,tumoflag,rinflag);
                       break;
                     }
 
                     break;
 
                   case 3:
-                    yakflag = haiteiflag(yakflag);
-                    std::cout << "海底フラグ" << yakflag << std::endl;
-
-                    switch (yakflag) {
-                      // 海底あり
-                    case 1:
-                      if ((tumoflag == 1) && (rinflag == 0)) {
-                        yk[7] = haitei;
-                        yak = yakadd(yak, 1);
-
-                        yakoutput(yk, yak);
-                      } else if ((tumoflag == 0) && (rinflag == 0)) {
-                        yk[7] = houtei;
-                        yak = yakadd(yak, 1);
-                        yakoutput(yk, yak);
-                      }
-                      break;
-                    // 海底無し
-                    case 2:
-                      yakoutput(yk, yak);
-                      break;
-                    }
+                   
+                    haiteichose(yk,yak,tumoflag,rinflag);
                     break;
                   }
                   break;
 
                 case 3:
-                  yakflag = haiteiflag(yakflag);
-                  std::cout << "海底フラグ" << yakflag << std::endl;
-
-                  switch (yakflag) {
-                    // 海底あり
-                  case 1:
-                    if ((tumoflag == 1) && (rinflag == 0)) {
-                      yk[7] = haitei;
-                      yak = yakadd(yak, 1);
-
-                      yakoutput(yk, yak);
-                    } else if ((tumoflag == 0) & (rinflag == 0)) {
-                      yk[7] = houtei;
-                      yak = yakadd(yak, 1);
-                      yakoutput(yk, yak);
-                    }
-                    break;
-                  // 海底無し
-                  case 2:
-                    yakoutput(yk, yak);
-                    break;
-                  }
+                 
+                  haiteichose(yk,yak,tumoflag,rinflag);
                   break;
                 }
                 break;
@@ -5868,112 +3104,31 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
               break;
 
             case 3:
-              yakflag = haiteiflag(yakflag);
-              std::cout << "海底フラグ" << yakflag << std::endl;
-
-              switch (yakflag) {
-                // 海底あり
-              case 1:
-                if (tumoflag == 1) {
-                  yk[7] = haitei;
-                  yak = yakadd(yak, 1);
-
-                  yakoutput(yk, yak);
-                } else {
-                  yk[7] = houtei;
-                  yak = yakadd(yak, 1);
-                  yakoutput(yk, yak);
-                }
-                break;
-              // 海底無し
-              case 2:
-                yakoutput(yk, yak);
-                break;
-              }
+              
+              haiteichose(yk,yak,tumoflag,rinflag);
               break;
             }
             break;
 
           case 3:
-            yakflag = haiteiflag(yakflag);
-            std::cout << "海底フラグ" << yakflag << std::endl;
-
-            switch (yakflag) {
-              // 海底あり
-            case 1:
-              if (tumoflag == 1) {
-                yk[7] = haitei;
-                yak = yakadd(yak, 1);
-
-                yakoutput(yk, yak);
-              } else {
-                yk[7] = houtei;
-                yak = yakadd(yak, 1);
-                yakoutput(yk, yak);
-              }
-              break;
-            // 海底無し
-            case 2:
-              yakoutput(yk, yak);
-              break;
-            }
+            
+            haiteichose(yk,yak,tumoflag,rinflag);
             break;
           }
           break;
 
         // 役決定
         case 3:
-          yakflag = haiteiflag(yakflag);
-          std::cout << "海底フラグ" << yakflag << std::endl;
-
-          switch (yakflag) {
-            // 海底あり
-          case 1:
-            if (tumoflag == 1) {
-              yk[7] = haitei;
-              yak = yakadd(yak, 1);
-
-              yakoutput(yk, yak);
-            } else {
-              yk[7] = houtei;
-              yak = yakadd(yak, 1);
-              yakoutput(yk, yak);
-            }
-            break;
-          // 海底無し
-          case 2:
-            yakoutput(yk, yak);
-            break;
-          }
+          
+          haiteichose(yk,yak,tumoflag,rinflag);
           break;
         }
         break;
 
       // 役決定
       case 3:
-        yakflag = haiteiflag(yakflag);
-        std::cout << "海底フラグ" << yakflag << std::endl;
-
-        switch (yakflag) {
-          // 海底あり
-        case 1:
-          if (tumoflag == 1) {
-            yk[7] = haitei;
-            yak = yakadd(yak, 1);
-
-            yakoutput(yk, yak);
-          } else {
-            yk[7] = houtei;
-            yak = yakadd(yak, 1);
-
-            yakoutput(yk, yak);
-          }
-          break;
-          // 海底無し
-        case 2:
-          yakoutput(yk, yak);
-          break;
-        }
+        
+        haiteichose(yk,yak,tumoflag,rinflag);
         break;
       }
       break;
@@ -5987,33 +3142,8 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
           yak = yakadd(yak, 1);
         }
       }
-      yakflag = haiteiflag(yakflag);
-      std::cout << "海底フラグ" << yakflag << std::endl;
-
-      switch (yakflag) {
-      // 海底あり
-      case 1:
-        if (tumoflag == 1) {
-          yk[7] = haitei;
-          yak = yakadd(yak, 1);
-
-          yakoutput(yk, yak);
-        } else {
-          yk[7] = houtei;
-          yak = yakadd(yak, 1);
-
-          yakoutput(yk, yak);
-        }
-        break;
-      // 海底無し
-      case 2:
-        if (reach == 3) {
-          yk[1] = tumo;
-          yak = yakadd(yak, 1);
-        }
-        yakoutput(yk, yak);
-        break;
-      }
+     
+      haiteichose(yk,yak,tumoflag,rinflag);
       break;
     }
     break;
@@ -6029,25 +3159,23 @@ int yakchose(int naki) {
   int yk[13] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
   int kakuritu;
   int yak = 0;
- // int tumoflag = 0;
+  int tumoflag = 0;
   int reachflag = 0;
- // int rinflag = 0;
+  int rinflag = 0;
   int oyaflag = 0;
-  //int hakuflag = 0;
-  //int hatuflag = 0;
-  //int tyunflag = 0;
+  int hakuflag = 0;
+  int hatuflag = 0;
+  int tyunflag = 0;
 
-  kakuritu = random2(100);
+  oyaflag = random2(100);
 
-  if (kakuritu <= 25) {
+  if (oyaflag <= 25) {
     oyaflag = 1;
-  } else if (kakuritu <= 50) {
+  } else if (oyaflag <= 50) {
     oyaflag = 2;
   } else {
     oyaflag = 3;
   }
-
-  kakuritu=0;
 
   switch (naki) {
   // 面前
@@ -6063,7 +3191,6 @@ int yakchose(int naki) {
       yakflag = 3;
     }
     std::cout << "立直フラグ" << yakflag << std::endl;
-    kakuritu=0;
 
     switch (yakflag) {
     // 立直
@@ -6092,6 +3219,7 @@ int yakchose(int naki) {
       // 一発無
       case 2:
         yak = menzen(yk, yak, oyaflag, reachflag);
+
         break;
       }
       break;
@@ -6131,7 +3259,7 @@ int yakchose(int naki) {
     //  立直なし
     case 3:
       reachflag = 3;
-      yak = menzen(yk, yak, oyaflag, reachflag);
+      yak = menzen(yk, yak, oyaflag, reach);
       break;
     }
     break;
@@ -6149,7 +3277,7 @@ int yakchose(int naki) {
 int main() {
   int flag;
   int nakiflag;
-  //int yak = 0;
+  int yak = 0;
   int kakuritu;
   int outyak;
 
