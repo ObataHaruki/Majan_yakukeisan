@@ -573,10 +573,10 @@ int haiteichose(int yk[],int yak, int tumoflag, int rinflag){
     //海底あり
     case 1:
       if((tumoflag==1)&&(rinflag==0)){
-        yk[13]=haitei;
+        yk[0]=haitei;
         yak=yakadd(yak , 1);
       }else if((tumoflag==0)&&(rinflag==0)){
-        yk[13]=houtei;
+        yk[0]=houtei;
         yak=yakadd(yak,1);
       }
     //海底なし
@@ -3366,6 +3366,56 @@ int menzen(int yk[], int yak, int oyaflag, int reach) {
   return x;
 }
 
+int furo(int yk[],int yak, int oyaflag){
+  int yakflag;
+  int kakuritu;
+  int tumoflag = 0;
+  int rinflag = 0;
+  int hakuflag = 0;
+  int hatuflag = 0;
+  int tyunflag = 0;
+  int x = 0;
+
+  // ツモの有無
+  if (kakuritu <= 188) {
+    yakflag = 1;
+  } else {
+    yakflag = 2;
+  }
+
+  std::cout << "ツモフラグ" << yakflag << std::endl;
+
+  switch (yakflag) {
+
+    case 1:
+      tumoflag=1;
+    case 2:
+      yakflag=0;
+      
+    if (kakuritu <= 224) {
+      yakflag = 1;
+    } else if (kakuritu <= 900) {
+      yakflag = 2;
+    } else if (kakuritu > 900) {
+      yakflag = 3;
+    }
+    std::cout << "タンヤオフラグ" << yakflag << std::endl;
+
+    switch(yakflag){
+      case 1:
+      case 2:
+      case 3:
+      break;
+    }
+
+
+    break;
+  
+  }
+
+  return yak;
+}
+
 //役選択プログラム
 int yakchose(int naki) {
   int yakflag;
@@ -3476,7 +3526,8 @@ int yakchose(int naki) {
     // 鳴きあり
 
   case 2:
-    break;
+    yak=furo(yk,yak,oyaflag);
+  break;
   }
 
   return yak;
